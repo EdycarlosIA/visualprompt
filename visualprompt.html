@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Prompts — Biblioteca de Prompts para Influencer IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0342;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --border: #e2dcf7;
+    --accent: #7c3aed;
+    --accent2: #6d28d9;
+    --accent-dim: rgba(124,58,237,0.08);
+    --text: #ffffff;
+    --muted: #7c6fa0;
+    --tag-bg: #f3effe;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    background: rgba(248,247,255,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+  .header-badge {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    font-weight: 300;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 40px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--muted);
+    max-width: 520px;
+    font-weight: 300;
+    font-size: 16px;
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    padding: 0 40px 48px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    transition: border-color 0.2s;
+  }
+  .search-box:focus-within { border-color: var(--accent); }
+  .search-icon { color: var(--muted); font-size: 16px; flex-shrink: 0; }
+  .search-box input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    width: 100%;
+  }
+  .search-box input::placeholder { color: var(--muted); }
+
+  /* ── CATEGORIES ── */
+  .categories {
+    padding: 0 40px 16px;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .cat-btn {
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+  }
+  .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #ffffff; font-weight: 500; }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 8px 40px 80px;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 56px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .section-icon {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(124,58,237,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .section-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--tag-bg);
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── PROMPT CARD ── */
+  .prompt-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(124,58,237,0.05);
+  }
+  .prompt-card:hover { border-color: rgba(124,58,237,0.35); }
+  .prompt-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    gap: 12px;
+  }
+  .prompt-title-row { display: flex; align-items: flex-start; gap: 10px; flex: 1; min-width: 0; }
+  .prompt-title-wrap { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .prompt-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 400;
+    white-space: normal;
+    line-height: 1.5;
+    padding-top: 1px;
+  }
+  .prompt-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+  .prompt-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: rgba(63, 52, 138, 0.95);
+  }
+  .prompt-tools {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .tool-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .tool-tag.chatgpt { border-color: rgba(16,163,127,0.35); color: #10a37f; background: rgba(16,163,127,0.06); }
+  .tool-tag.gemini  { border-color: rgba(66,133,244,0.35); color: #4285f4; background: rgba(66,133,244,0.06); }
+  .tool-tag.freepik { border-color: rgba(255,110,0,0.3);   color: #ff6e00; background: rgba(255,110,0,0.06); }
+  .tool-tag.grok    { border-color: rgba(255,255,255,0.15); color: #ccc;    background: rgba(255,255,255,0.04); }
+  .tool-tag.flow    { border-color: rgba(160,80,255,0.3);  color: #b06fff; background: rgba(160,80,255,0.06); }
+  .tool-tag.kling   { border-color: rgba(255,60,120,0.3);  color: #ff3c78; background: rgba(255,60,120,0.06); }
+
+  .expand-btn {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--muted);
+    font-size: 12px;
+    transition: all 0.18s;
+  }
+  .prompt-card.open .expand-btn { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
+
+  /* ── PROMPT BODY ── */
+  .prompt-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+  .prompt-card.open .prompt-body { display: block; }
+  .prompt-body-inner {
+    padding: 24px 20px;
+    position: relative;
+  }
+  .prompt-text {
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #3d2f6b;
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 6px;
+  }
+  .prompt-text::-webkit-scrollbar { width: 4px; }
+  .prompt-text::-webkit-scrollbar-track { background: transparent; }
+  .prompt-text::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .prompt-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+  .btn-copy {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px;
+    border-radius: 9px;
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.01em;
+  }
+  .btn-copy:hover { background: var(--accent2); }
+  .btn-copy.copied { background: #2d6a4f; color: #fff; }
+  .btn-expand-full {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 16px;
+    border-radius: 9px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-expand-full:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── SECTION DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  /* ── STATS BAR ── */
+  .stats {
+    display: flex;
+    gap: 2px;
+    padding: 0 40px 40px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .stat {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+  }
+  .stat:first-child { border-radius: 12px 0 0 12px; }
+  .stat:last-child  { border-radius: 0 12px 12px 0; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(6px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: var(--muted)}
+  .modal-close {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.18s;
+  }
+  .modal-close:hover { color: var(--text); border-color: var(--text); }
+  .modal-body { padding: 24px; overflow-y: auto; flex: 1; }
+  .modal-body pre {
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #3d2f6b;
+  }
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 8px;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    display: none;
+  }
+  .empty-state.visible { display: block; }
+  .empty-state p { font-size: 15px; margin-top: 8px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    .hero, .search-wrap, .categories, .main, .stats { padding-left: 20px; padding-right: 20px; }
+    .stats { flex-direction: column; gap: 8px; }
+    .stat:first-child, .stat:last-child, .stat { border-radius: 10px; }
+    .prompt-tools { display: none; }
+    .hero h1 { font-size: 32px; }
+  }
+
+  /* ── HIGHLIGHT SEARCH ── */
+  .highlight { background: rgba(124,58,237,0.18); border-radius: 2px; }
+
+  /* ── SCROLL REVEAL ── */
+  .section { animation: fadeUp 0.45s ease both; }
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.12s; }
+  .section:nth-child(3) { animation-delay: 0.19s; }
+  .section:nth-child(4) { animation-delay: 0.26s; }
+  .section:nth-child(5) { animation-delay: 0.33s; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-dot"></span>
+    Visual Prompts
+  </div>
+  <span class="header-badge">Biblioteca de Prompts para Influencer IA</span>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Coleção de Prompts</div>
+  <h1>Crie sua <span>Influencer IA</span><br>com os melhores prompts</h1>
+  <p>Biblioteca organizada com prompts prontos para imagem, animação, troca de roupa, ganchos e muito mais.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num" id="total-prompts">68</div>
+    <div class="stat-label">Prompts</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Categorias</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Ferramentas</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Possibilidades</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Pesquisar prompts por título ou conteúdo…" autocomplete="off">
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories" id="cat-bar">
+  <button class="cat-btn active" data-cat="all">Todos</button>
+  <button class="cat-btn" data-cat="influencer">👤 Influencer</button>
+  <button class="cat-btn" data-cat="animacao">🎬 Animação</button>
+  <button class="cat-btn" data-cat="gancho">🪝 Ganchos</button>
+  <button class="cat-btn" data-cat="troca-roupa">👗 Troca de Roupa</button>
+  <button class="cat-btn" data-cat="cenario">🏠 Cenário</button>
+  <button class="cat-btn" data-cat="cta">📣 CTA</button>
+  <button class="cat-btn" data-cat="tiktokshop">🛍️ TikTok Shop</button>
+  <button class="cat-btn" data-cat="unboxing">📦 Unboxing</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main" id="main-content">
+
+  <!-- ═══════════════ SEÇÃO: INFLUENCER ═══════════════ -->
+  <div class="section" data-category="influencer">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">Criando Influencer</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <!-- Prompt 1 -->
+    <div class="prompt-card" data-category="influencer">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">01</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Criando o Rosto da Influencer</span><span class="prompt-desc">Gera retrato 3x4 ultrarrealista usando 2 imagens de referência • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Crie uma imagem ultrarrealista de uma influenciadora digital brasileira de IA, usando duas imagens de referência enviadas pelo usuário.
+
+Use a Imagem 1 como referência principal do rosto. Analise cuidadosamente formato facial, proporções, tom de pele, textura da pele, sobrancelhas, olhos, nariz, boca, queixo, expressão, cabelo visível, ângulo facial e identidade visual geral.
+
+Use a Imagem 2 apenas como apoio para coerência corporal, tom geral, estilo e presença visual, sem perder o foco principal no rosto.
+
+Crie uma foto de rosto estilo retrato 3x4 profissional, com a influenciadora olhando diretamente para a câmera, rosto mais próximo da câmera, enquadramento do topo da cabeça até a parte superior dos ombros. A imagem deve priorizar máximo detalhamento facial, naturalidade e realismo.
+
+A influenciadora deve parecer uma pessoa real, brasileira, com aparência humana autêntica, sem estética artificial. A pele deve ter poros visíveis, textura natural, pequenas variações de tom, leves imperfeições humanas, expressão confiante, simpática e espontânea.
+
+AMBIENTE:
+Cenário natural, simples e realista, com fundo neutro ou quarto brasileiro discreto levemente desfocado. Nada artificial, nada futurista, nada com aparência de estúdio falso.
+
+ILUMINAÇÃO:
+Luz natural suave, realista, vindo de uma janela, com sombras delicadas no rosto, brilho natural nos olhos e alta definição nos detalhes faciais.
+
+REGRAS OBRIGATÓRIAS:
+– Criar uma influenciadora digital brasileira de IA
+– Usar a Imagem 1 como referência principal do rosto
+– Usar a Imagem 2 como apoio de coerência visual
+– Foto de rosto próxima da câmera
+– Estilo retrato 3x4 realista
+– Olhando diretamente para a câmera
+– Alta nitidez no rosto e nos olhos
+– Aparência natural, humana e brasileira
+– Olhos somente castanhos ou pretos
+– Proibido olhos azuis, verdes ou cinzas
+– Não adicionar texto, logo ou marca d'água
+
+INSTRUÇÕES NEGATIVAS:
+Não criar rosto genérico de IA. Não criar pele plástica. Não suavizar demais a pele. Não criar aparência de boneca. Não criar estética 3D, CGI, anime, cartoon ou ilustração. Não distorcer olhos, boca, nariz, rosto ou cabelo. Não criar fundo artificial. Não usar filtros exagerados.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Criando o Rosto da Influencer', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card" data-category="influencer">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">02</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Criando o Corpo da Influencer</span><span class="prompt-desc">Corpo inteiro 9:16 em quarto brasileiro, preservando identidade facial • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Crie uma fotografia ultrarrealista vertical 9:16 de uma influenciadora digital brasileira de IA em corpo inteiro, dos pés à cabeça, usando duas imagens de referência enviadas pelo usuário.
+
+A Imagem 1 é a referência principal e obrigatória do rosto da influenciadora. Analise e preserve com máxima fidelidade o rosto da Imagem 1: formato facial, identidade visual, proporções, tom de pele, textura da pele, olhos, sobrancelhas, nariz, boca, queixo, cabelo, expressão, idade aparente e aparência geral.
+
+A Imagem 2 é a referência principal do corpo, pose e proporções físicas. Analise o tipo corporal, altura aparente, silhueta, postura, ombros, cintura, quadril, braços, pernas, mãos, pés, posição do corpo, roupa e linguagem corporal.
+
+CENÁRIO OBRIGATÓRIO:
+Quarto fechado, simples, natural e realista, com aparência brasileira. Fundo limpo e discreto, parede neutra, cama simples, cortina, guarda-roupa ou poucos elementos reais de quarto. Não usar varanda, sala aberta, janela panorâmica, vista de cidade, fundo externo ou ambiente luxuoso artificial.
+
+QUALIDADE FOTOGRÁFICA:
+Ultra-realistic professional DSLR photo, high resolution, sharp face, detailed body, realistic skin texture, natural body proportions, realistic clothing fabric, accurate hands and feet, clean composition, natural Brazilian bedroom, premium editorial quality, no blur, no low quality details.
+
+REGRAS OBRIGATÓRIAS:
+– Usar Imagem 1 como rosto definitivo
+– Usar Imagem 2 como corpo, pose e proporção de referência
+– Manter forte semelhança facial da Imagem 1
+– Corpo inteiro dos pés à cabeça
+– Formato vertical 9:16
+– Influenciadora brasileira de IA
+– Em pé, olhando para a câmera
+– Quarto fechado, simples e realista
+– Olhos somente castanhos ou pretos
+
+INSTRUÇÕES NEGATIVAS:
+Não trocar o rosto da Imagem 1. Não modificar a identidade facial. Não criar corpo aleatório ignorando a Imagem 2. Não criar aparência de montagem. Não cortar cabeça ou pés. Não deformar mãos, dedos, pernas, braços, pés, rosto ou cabelo. Não criar cenário aberto. Não usar fundo externo. Não criar pele plástica.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Criando o Corpo da Influencer', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: ANIMAÇÃO - GANCHOS ═══════════════ -->
+  <div class="section" data-category="gancho">
+    <div class="section-header">
+      <div class="section-icon">🪝</div>
+      <div class="section-title">Animação — Ganchos</div>
+      <span class="section-count">3 prompts</span>
+    </div>
+
+    <!-- Gancho 1 -->
+    <div class="prompt-card" data-category="gancho animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">03</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Gancho 1 — Apresentação POV Natural</span><span class="prompt-desc">A influencer se aproxima da câmera e mostra detalhe do laço da roupa • Flow / Freepik / Grok</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+          <span class="tool-tag grok">Grok</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate the subject as a REAL person presenting clothing in a POV-style video.
+
+🔥 START OF ANIMATION:
+– The subject starts at a natural distance from the camera
+– She calmly takes two small, natural steps forward toward the camera
+– While approaching, she gently touches and lightly holds the bow/lace detail on the chest area
+– The gesture is delicate, subtle and realistic, like naturally showing a clothing detail
+– No emphasis, no posing, no exaggeration
+– The movement feels spontaneous and casual
+– After briefly touching the bow, she naturally releases it
+– She takes a small step back to her original position
+– Smooth transition into the rest of the animation
+
+GENERAL MOTION STYLE:
+– Natural, confident, fluid movements
+– Not static / Not exaggerated / Not robotic
+– Real human timing
+
+BODY MOVEMENTS:
+– One hand naturally rests on the waist
+– Gentle hip movement (side-to-side, very subtle)
+– One foot forward, the other relaxed behind
+– Natural posture, relaxed shoulders
+
+CLOTHING PRESENTATION:
+– Small, natural movements to highlight the outfit
+– Slight torso rotation to show fit and fabric
+– No aggressive posing / No fashion runway exaggeration
+– Movements feel spontaneous and casual
+
+FACIAL EXPRESSION (VERY IMPORTANT – REAL HUMAN TIMING):
+– The subject does NOT smile continuously
+– Facial expression alternates naturally throughout the video
+– While approaching: neutral, relaxed expression, lips softly closed
+– During the bow/lace touch: a brief, subtle smile appears
+– After releasing: expression returns to neutral
+– Later: she gently turns her head slightly to one side, a short warm smile appears
+
+PERSONALITY:
+– Sympathetic / Approachable / Comfortable
+– Feels like a real person casually recording a video
+
+CAMERA & POV:
+– POV perspective, as if the phone is held by a person
+– Very subtle handheld micro-movements
+– No camera shake / No zoom
+– Camera remains at chest/face height
+
+REALISM RULES:
+– Preserve original facial identity
+– Preserve skin texture
+– Preserve hair movement (slight natural motion)
+– Natural fabric physics
+– No beauty filters / No smoothing / No stylization
+
+RESTRICTIONS:
+– No talking / No text / No UI / No effects
+– No exaggerated dance / No influencer posing clichés
+
+FINAL RESULT:
+A hyper-realistic POV fashion video where the subject feels alive and human, with natural facial expression changes, occasional soft smiles, neutral moments in between, and subtle head turns — indistinguishable from a real casual phone recording.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Gancho 1 — Apresentação POV Natural', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gancho Jogar Roupa 1 -->
+    <div class="prompt-card" data-category="gancho animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">04</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Gancho Jogar Roupa 1 — Cobrindo a Lente</span><span class="prompt-desc">A peça de roupa cobre temporariamente a câmera como transição de gancho • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+          <span class="tool-tag grok">Grok</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate the subject as a REAL person presenting clothing in a POV-style fashion video.
+
+🔥 START OF ANIMATION (HOOK TRANSITION VERSION):
+– The subject starts standing naturally at a comfortable distance from the camera
+– She is already holding the clothing/product naturally with both hands in front of the body
+– Neutral relaxed posture / Soft natural facial expression
+– She calmly takes two small natural steps forward toward the camera
+– The clothing naturally moves together with her body
+
+🔥 MAIN HOOK ACTION (CRITICAL):
+– As she gets closer to the camera:
+  • she smoothly raises the clothing/product forward toward the lens
+  • the clothing gradually occupies more of the frame
+  • movement feels natural and continuous
+  • no aggressive motion / no throwing action
+– The clothing must FULLY cover the camera lens naturally
+– The transition happens by the clothing physically reaching the camera
+– The fabric fills the entire frame progressively
+
+IMPORTANT:
+– The subject does NOT toss the clothing
+– The subject does NOT shake the clothing aggressively
+– The movement is smooth, controlled and realistic
+– The clothing behaves with natural fabric physics while moving forward
+– During the forward movement: a subtle soft smile appears briefly
+
+PRODUCT/FABRIC REALISM:
+– Realistic fabric weight
+– Natural hanging behavior
+– Subtle wrinkles and folds
+– Slight fabric compression from fingers
+– Natural gravity pull / No stiff fabric / No floating product
+
+CAMERA & POV:
+– POV-style camera
+– Very subtle handheld micro movement only
+– No zoom / No camera shake
+– Camera remains fixed in position
+– Real smartphone recording feeling
+
+RESTRICTIONS:
+– No talking / No text / No UI / No effects
+– Transition must happen ONLY through the clothing covering the lens
+
+FINAL RESULT:
+A hyper-realistic POV-style fashion video where the subject naturally walks toward the camera holding a clothing product, then smoothly brings the fabric directly into the lens until it fully covers the frame, creating a realistic organic transition identical to a real influencer clothing hook video filmed on a smartphone.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Gancho Jogar Roupa 1 — Cobrindo a Lente', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gancho Jogar Roupa 2 -->
+    <div class="prompt-card" data-category="gancho animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">05</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Gancho Jogar Roupa 2 — Movimento Suave</span><span class="prompt-desc">Tecido desliza suavemente na frente da câmera para revelar o look • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+          <span class="tool-tag grok">Grok</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">The subject must move naturally and calmly.
+
+Do NOT rush aggressively toward the camera.
+Do NOT run. Do NOT lunge forward.
+Do NOT create chaotic movement.
+Do NOT create exaggerated fast motion.
+
+The hook should feel smooth and controlled like a real casual influencer recording.
+
+CORRECT MOVEMENT FLOW:
+– The subject starts already holding the clothing/product naturally
+– She takes ONE natural small step forward
+– While stepping forward, she smoothly raises the clothing toward the camera
+– The movement is fluid and continuous
+– Calm natural pacing
+– No sudden acceleration
+
+The clothing should reach the camera naturally within around 1–2 seconds.
+
+IMPORTANT:
+– The subject body movement stays relaxed
+– Natural shoulder movement / Natural arm motion
+– Natural posture balance
+– No exaggerated hip movement / No dramatic motion
+
+FACIAL BEHAVIOR FIX (VERY IMPORTANT):
+– Mouth must remain naturally closed most of the time
+– Do NOT generate talking behavior
+– Do NOT simulate speech / Do NOT create lip-sync motion
+– No random mouth opening / No exaggerated facial animation
+
+Expression should remain:
+• soft / neutral / relaxed / natural
+
+A very subtle smile is allowed briefly, but:
+– lips mostly closed
+– no visible talking motion
+– no exaggerated grin
+
+MOTION QUALITY:
+– Real-time natural motion
+– No slow motion / No delay / No laggy movement
+– No robotic timing / No jitter / No frame skipping / No looping behavior
+
+CAMERA:
+– Stable POV camera
+– Very subtle handheld micro movement only
+– No zoom / No cinematic motion / No shake
+
+FINAL FEELING:
+The animation should feel like a real girl casually stepping forward and softly placing the clothing in front of the phone camera for a natural TikTok-style transition.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Gancho Jogar Roupa 2 — Movimento Suave', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: ANIMAÇÃO - ELASTICIDADE ═══════════════ -->
+  <div class="section" data-category="animacao">
+    <div class="section-header">
+      <div class="section-icon">🎬</div>
+      <div class="section-title">Animação — Elasticidade &amp; Movimento</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">06</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Animação Corpo Inteiro — Movimento Fluido</span><span class="prompt-desc">Movimentos naturais de corpo inteiro com física realista de tecido • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image as a hyper-realistic full-body video of a real human being.
+
+BODY ANIMATION:
+– Natural, fluid full-body movement
+– Subtle weight shifting from foot to foot
+– Gentle sway in the torso
+– Arms moving slightly with body rhythm
+– Natural breathing visible in chest and shoulders
+– Realistic balance and center of gravity
+– No robotic or mechanical movement
+– No loop artifacts
+
+CLOTHING ANIMATION:
+– Fabric moves naturally with body
+– Realistic physics: weight, drape, wrinkle formation
+– Slight fabric compression and release with movement
+– Natural gravity pull on all clothing elements
+– Hair moves with subtle natural sway
+
+FACIAL ANIMATION:
+– Eyes blink naturally (every 3–5 seconds)
+– Subtle eye movement (not fixed stare)
+– Micro expressions: slight eyebrow movement
+– Natural skin movement with facial muscles
+– Lips relaxed, closed, no talking
+
+SKIN & TEXTURE:
+– Preserve original skin texture and pores
+– No smoothing, no beautification filters
+– Realistic skin tone consistency
+– Natural lighting response with movement
+
+QUALITY RULES:
+– Hyper-realistic output
+– No cartoon / No CGI look
+– No face distortion
+– No body proportion changes
+– Preserve original identity 100%</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Animação Corpo Inteiro — Movimento Fluido', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">07</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Animação Cabelo — Movimento Natural</span><span class="prompt-desc">Cabelo se move com vento suave enquanto mantém expressão natural • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag kling">Kling</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image focusing on ultra-realistic hair movement.
+
+HAIR ANIMATION (PRIMARY FOCUS):
+– Natural hair movement with subtle air/breeze simulation
+– Individual strand behavior (not block movement)
+– Realistic hair physics: weight, bounce, elasticity
+– Slight delay in hair movement after body motion stops
+– Natural layering: outer strands move more than inner
+– Hair falls naturally with gravity
+– No stiff or plastic-looking hair
+– No hair clipping through body or clothing
+
+HAIR TYPES HANDLING:
+– Long straight: gentle waves and slight lift at tips
+– Curly/wavy: spring-like bounce with each movement
+– Short hair: subtle movement with slight drift
+– Bangs/fringe: light flutter with natural fall-back
+
+SUPPORTING BODY MOVEMENT:
+– Subtle head turns to trigger hair motion
+– Gentle nodding or tilting
+– Natural posture shifts
+
+REALISM REQUIREMENTS:
+– Preserve hair color, highlights and texture exactly
+– No hair color changes
+– No sudden hair shape changes
+– Smooth continuous motion
+– No looping artifacts
+– No hair merging or melting
+
+FINAL RESULT:
+Hair movement that is indistinguishable from a real video, with each strand responding naturally to physics, gravity and subtle body movement.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Animação Cabelo — Movimento Natural', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: ANIMAÇÃO NO ESPELHO ═══════════════ -->
+  <div class="section" data-category="animacao">
+    <div class="section-header">
+      <div class="section-icon">🪞</div>
+      <div class="section-title">Animação — No Espelho</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">08</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">OOTD Espelho — Apresentação de Roupa</span><span class="prompt-desc">Influencer apresenta o look do dia em frente ao espelho, estilo OOTD • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image as a hyper-realistic OOTD mirror selfie video.
+
+SCENE SETUP:
+– The subject is standing in front of a mirror
+– She holds the phone naturally to film herself in the mirror
+– POV-style: camera is the phone she is holding
+– The reflection in the mirror is her full body
+– Room background: simple, natural, realistic bedroom or bathroom
+
+ANIMATION FLOW:
+– She starts in a natural standing pose looking at her reflection
+– Slowly rotates her body 90 degrees to one side to show the outfit silhouette
+– Pauses briefly showing the side profile
+– Smoothly rotates back to face the mirror
+– Slight lean forward to look at a clothing detail
+– Returns to neutral standing pose
+– Subtle weight shift throughout
+
+CLOTHING SHOWCASE:
+– Movements designed to naturally show the full outfit
+– Fabric drape and fit visible during rotation
+– Natural clothing physics during movement
+– No aggressive posing
+– No fashion runway behavior
+
+MIRROR REFLECTION REALISM:
+– The reflection must move in perfect sync with the subject
+– Correct mirror physics (reversed image)
+– Natural lighting on both subject and reflection
+– Subtle depth of field: subject sharper than background
+– Realistic mirror surface (no distortion)
+
+FACIAL & BODY:
+– Natural expressions throughout
+– Brief soft smile during rotation
+– Relaxed between movements
+– Natural breathing and body rhythm
+
+FINAL RESULT:
+A hyper-realistic OOTD mirror selfie video that looks exactly like a real girl filming herself trying on an outfit, indistinguishable from a genuine TikTok/Reels mirror video.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('OOTD Espelho — Apresentação de Roupa', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">09</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Espelho — Giro 360° de Roupa</span><span class="prompt-desc">Giro completo em frente ao espelho mostrando todos os ângulos da roupa • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag kling">Kling</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image as a hyper-realistic 360 outfit turn mirror video.
+
+CORE ACTION:
+– The subject performs a slow, smooth 360-degree full body turn
+– Turn is continuous and natural, not mechanical
+– She starts facing the mirror/camera
+– Rotates to show left profile → back → right profile → returns to front
+– Total turn takes approximately 3–4 seconds
+– Movement is elegant and controlled
+
+DURING THE TURN:
+– Arms stay naturally at her sides or slightly extended
+– Clothing flows naturally during rotation
+– Hair moves with the turn following natural physics
+– Body weight shifts naturally with the rotation
+– Feet pivot naturally on the floor
+
+CLOTHING DURING TURN:
+– Full outfit visible from all angles
+– Fabric and drape shown realistically
+– Natural physics: skirts flare slightly, fabric moves with rotation
+– Fit and silhouette clearly visible from every angle
+
+FACIAL EXPRESSION:
+– Confident, natural expression throughout
+– Brief glance at the mirror as she passes the front
+– No exaggerated smiling
+– Natural eye movement
+
+CAMERA:
+– Fixed camera position (not moving)
+– POV matches a mirror selfie setup
+– Subtle ambient environment visible in background
+
+FINAL RESULT:
+A smooth, realistic 360-degree outfit turn that showcases the complete clothing from every angle, identical to a real influencer trying on clothes in front of a mirror.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Espelho — Giro 360° de Roupa', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: ANIMAÇÃO CTA ═══════════════ -->
+  <div class="section" data-category="cta">
+    <div class="section-header">
+      <div class="section-icon">📣</div>
+      <div class="section-title">Animação — CTA (Call to Action)</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="cta animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">10</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">CTA Apontar para a Tela</span><span class="prompt-desc">Gesto de apontar para a tela incentivando clique ou compra • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image with a hyper-realistic CTA pointing gesture for a fashion/product video.
+
+CTA ACTION:
+– The subject raises one arm naturally toward the camera
+– She points her finger directly at the camera/viewer
+– The gesture is confident but friendly, not aggressive
+– Arm raises smoothly from a resting position
+– Finger points at camera for 1–2 seconds
+– Arm naturally lowers back after the gesture
+
+GESTURE DETAILS:
+– The pointing arm moves with natural muscle physics
+– Slight shoulder raise as arm extends
+– Natural elbow bend during the motion
+– Finger clearly extended pointing forward
+– Rest of hand relaxed (not stiff)
+– Other arm remains naturally at side or on waist
+
+FACIAL EXPRESSION DURING CTA:
+– Direct eye contact with camera as she points
+– Confident, warm smile appears during the gesture
+– Eyebrows slightly raised (engaging expression)
+– Expression returns to neutral after gesture completes
+– No exaggerated acting
+
+BODY LANGUAGE:
+– Slight forward lean toward camera during pointing
+– Confident posture
+– Natural weight shift
+– Movement feels spontaneous and engaging
+
+MOTION QUALITY:
+– Smooth natural motion
+– No robotic timing
+– Real human gesture speed
+– No sudden jumps in animation
+
+FINAL RESULT:
+A natural, engaging CTA pointing gesture that looks like a real influencer directing their audience to click/shop/follow, indistinguishable from a real video recording.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('CTA Apontar para a Tela', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="cta animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">11</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">CTA Gesto de Swipe Up</span><span class="prompt-desc">Movimento de swipe up para direcionar audiência a stories ou links • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image with a hyper-realistic swipe-up gesture CTA for social media.
+
+SWIPE UP ACTION:
+– The subject raises one hand toward the bottom of the frame
+– Makes a natural upward swiping gesture with her finger or full hand
+– Gesture mimics the classic "swipe up to shop" social media action
+– Motion is smooth, fluid, and natural
+– Gesture repeats once or twice naturally
+– Hand returns to natural position after
+
+HAND AND ARM DETAILS:
+– Natural hand anatomy (realistic fingers, no distortion)
+– Arm movement follows natural shoulder and elbow mechanics
+– Wrist rotates slightly during the upward swipe
+– Fingers relaxed but purposeful during gesture
+– Speed: moderate, not too fast, not too slow
+
+FACIAL EXPRESSION:
+– Engaging, warm smile during the gesture
+– Eye contact with camera maintained
+– Slightly raised eyebrows (inviting expression)
+– Expression is friendly and persuasive
+
+SUPPORTING BODY:
+– Slight forward body lean during gesture
+– Other hand naturally on waist or at side
+– Confident posture throughout
+
+TIMING:
+– Gesture begins naturally after a brief pause
+– No sudden start
+– Smooth acceleration and deceleration
+– Natural human gesture rhythm
+
+FINAL RESULT:
+A realistic, engaging swipe-up CTA gesture that looks exactly like a real influencer directing their audience to interact with content on Instagram Stories, TikTok or Reels.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('CTA Gesto de Swipe Up', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: TROCA DE ROUPA ═══════════════ -->
+  <div class="section" data-category="troca-roupa">
+    <div class="section-header">
+      <div class="section-icon">👗</div>
+      <div class="section-title">Troca de Roupa</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="troca-roupa">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">12</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Troca de Roupa — Mesmo Cenário</span><span class="prompt-desc">Recria a mesma pessoa com roupa nova, preservando identidade e cenário • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Using the reference image provided, recreate the same person wearing the new clothing/outfit described below.
+
+IDENTITY PRESERVATION (MANDATORY):
+– Preserve 100% facial identity from the reference image
+– Same face: structure, proportions, skin tone, features, expression style
+– Same body type and proportions
+– Same hair: color, length, texture, style
+– No face changes / No identity swap
+
+NEW CLOTHING:
+[DESCREVA A ROUPA AQUI]
+– Realistic fabric rendering
+– Natural clothing drape and fit
+– Correct clothing physics for the body type
+– Realistic wrinkles and folds
+
+SCENE:
+– Same background/environment as reference image
+– Same lighting direction and quality
+– Same camera angle and framing
+– Seamless integration — no visible compositing
+
+POSE:
+– Same or very similar pose to reference image
+– Natural standing or requested pose
+– Body proportions unchanged
+
+QUALITY:
+– Ultra-realistic DSLR photo quality
+– High resolution
+– Sharp face and clothing details
+– No visible AI artifacts
+– No smoothing filters
+
+OUTPUT:
+A photorealistic image of the same person from the reference image, now wearing the new outfit, in the same scene, with identical identity and quality indistinguishable from a real photograph.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Troca de Roupa — Mesmo Cenário', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="troca-roupa">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">13</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Troca de Roupa — Múltiplos Looks</span><span class="prompt-desc">Gera variações da mesma pessoa com diferentes looks no mesmo cenário • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Using the reference image, create [NUMBER] variations of the same person wearing different outfits.
+
+IDENTITY PRESERVATION (MANDATORY FOR ALL VARIATIONS):
+– Preserve 100% facial identity across ALL variations
+– Same face, body, hair in every single image
+– No identity drift between variations
+– All images must look like the same real person
+
+VARIATIONS REQUESTED:
+Variation 1: [DESCREVA O LOOK 1]
+Variation 2: [DESCREVA O LOOK 2]
+Variation 3: [DESCREVA O LOOK 3]
+
+CONSISTENCY RULES:
+– Same lighting quality across all variations
+– Same or similar background
+– Same framing and camera angle
+– Consistent skin tone
+– Consistent hair appearance
+
+CLOTHING REALISM FOR EACH VARIATION:
+– Realistic fabric for each clothing type
+– Natural fit and drape for each outfit
+– Proper clothing physics
+– Realistic shadows and highlights
+
+OUTPUT FORMAT:
+[NUMBER] separate photorealistic images, each showing the same person in a different outfit, all with identical quality and identity preservation, forming a cohesive content set for social media.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Troca de Roupa — Múltiplos Looks', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: TROCA DE CENÁRIO ═══════════════ -->
+  <div class="section" data-category="cenario">
+    <div class="section-header">
+      <div class="section-icon">🏠</div>
+      <div class="section-title">Troca de Cenário</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="cenario">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">14</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Novo Cenário — Ambiente Fechado</span><span class="prompt-desc">Transplanta a influencer para um cenário interno diferente com luz natural • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Using the reference image, place the same person in a new background/scene while preserving complete identity.
+
+NEW SCENE:
+[DESCREVA O NOVO AMBIENTE/CENÁRIO AQUI]
+
+IDENTITY PRESERVATION (MANDATORY):
+– Preserve 100% facial identity: face, features, skin tone, hair
+– Same body and proportions
+– Same clothing as in the reference image (preserve exactly)
+– Only the background changes
+
+SCENE INTEGRATION RULES:
+– Realistic lighting matching the new environment
+– Correct shadows on body and clothing from the new light source
+– Realistic ground shadows/feet placement
+– No floating subject
+– Natural perspective matching
+– No visible compositing edge
+
+ENVIRONMENTAL REALISM:
+– High quality background rendering
+– Correct depth of field (subject in focus, background slightly softer)
+– Realistic ambient lighting
+– No background clipping or artifacts
+
+PHOTO QUALITY:
+– Ultra-realistic output
+– Sharp subject
+– Natural color grading matching the scene
+– No filters
+– Professional editorial quality
+
+FINAL RESULT:
+A photorealistic image of the same person from the reference, placed naturally in the new scene, indistinguishable from a real photograph taken at that location.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Novo Cenário — Ambiente Fechado', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="cenario">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">15</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Novo Cenário — Externo / Outdoor</span><span class="prompt-desc">Coloca a influencer em ambiente externo realista preservando identidade • ChatGPT / Gemini</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag chatgpt">ChatGPT</span>
+          <span class="tool-tag gemini">Gemini</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Using the reference image, recreate the same person in an outdoor setting with full identity preservation.
+
+OUTDOOR SCENE:
+[DESCREVA O AMBIENTE EXTERNO: praia, parque, rua, cidade, campo, etc.]
+
+IDENTITY PRESERVATION (MANDATORY):
+– Preserve 100% facial identity
+– Same face, hair and body from reference
+– Same or described clothing
+– Natural outdoor skin tone response (no over-brightening)
+
+OUTDOOR LIGHTING:
+– Natural daylight/golden hour/overcast (specify preferred)
+– Realistic sun direction creating natural shadows
+– Correct highlight and shadow on face and body
+– Natural outdoor ambient color temperature
+– No artificial studio lighting look in outdoor scene
+
+ENVIRONMENTAL INTEGRATION:
+– Natural ground (grass, sand, pavement, etc.) under feet
+– Realistic depth: foreground, subject, background layers
+– Natural color grading for outdoor setting
+– Wind effect on hair and light fabrics (if applicable)
+– Natural outdoor ambience
+
+BACKGROUND ELEMENTS:
+– Realistic outdoor setting elements
+– Appropriate depth of field
+– Natural bokeh if applicable
+– No synthetic-looking background
+
+FINAL RESULT:
+A photorealistic outdoor portrait of the same person from the reference image, naturally placed in the described outdoor environment, with professional editorial quality indistinguishable from a real outdoor photo shoot.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Novo Cenário — Externo / Outdoor', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: UNBOXING ═══════════════ -->
+  <div class="section" data-category="unboxing">
+    <div class="section-header">
+      <div class="section-icon">📦</div>
+      <div class="section-title">Unboxing</div>
+      <span class="section-count">2 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="unboxing">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">16</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Unboxing POV — Abertura de Caixa</span><span class="prompt-desc">Animação de unboxing POV com reação de surpresa ao abrir embalagem • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag freepik">Freepik</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image as a hyper-realistic unboxing video.
+
+UNBOXING ANIMATION:
+– The subject holds a package/box naturally in both hands
+– She carefully opens the box with natural finger movements
+– Realistic hand and finger physics throughout
+– The box opens smoothly revealing contents inside
+– She looks inside with natural curiosity expression
+– She may remove the tissue paper or filler material
+– She reaches in and carefully removes the main product
+– She holds the product up toward the camera to show it
+– Natural handling: product weight visible in arm/wrist movement
+
+HAND AND PRODUCT PHYSICS:
+– Realistic hand grip and finger positioning
+– Natural wrist movement when handling objects
+– Product weight behavior: heavier items affect arm position
+– Tissue paper or packaging material moves naturally (crinkle physics)
+– Box flaps open with realistic cardboard physics
+
+FACIAL EXPRESSION FLOW:
+– Beginning: neutral, slightly excited anticipation
+– During opening: focused, natural curiosity
+– On reveal: genuine surprise/happiness reaction
+– Showing product: confident, satisfied smile
+– Expressions are subtle and human, not theatrical
+
+CAMERA:
+– POV-style, slightly above product level
+– Very subtle handheld movement
+– No zoom (or very slow natural zoom toward product)
+– Natural light and shadow on hands and product
+
+FINAL RESULT:
+A hyper-realistic POV unboxing video that looks exactly like a real person authentically opening and reacting to a product for the first time, identical in feel to organic TikTok or Instagram Reels unboxing content.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Unboxing POV — Abertura de Caixa', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-card" data-category="unboxing">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row">
+          <span class="prompt-number">17</span>
+          <span class="prompt-title-wrap"><span class="prompt-title">Unboxing — Reação ao Produto</span><span class="prompt-desc">Sequência emocional de receber, examinar e recomendar o produto • Flow / Freepik</span></span>
+        </div>
+        <div class="prompt-tools">
+          <span class="tool-tag flow">Flow</span>
+          <span class="tool-tag kling">Kling</span>
+        </div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-body-inner">
+          <div class="prompt-text">Animate this image as a hyper-realistic product reaction video focused on authentic emotional response.
+
+REACTION ANIMATION:
+– The subject is shown after opening/receiving a product
+– She holds the product visibly in her hands
+– She examines it with genuine interest and detail
+– She turns it, looks at it from different angles
+– Natural handling behavior throughout
+– She shows the product face-forward toward the camera
+
+AUTHENTIC EMOTIONAL JOURNEY:
+Phase 1 — First Look:
+– Eyes widen slightly
+– Lips part naturally
+– Slight inhale visible in chest
+– Genuine surprised/pleased expression
+
+Phase 2 — Examination:
+– Focused, curious expression while inspecting details
+– Head tilts naturally as she looks at different parts
+– Subtle nods of approval
+– Natural smile grows gradually
+
+Phase 3 — Show & Recommend:
+– Turns product to camera
+– Warm, confident, satisfied expression
+– Brief smile while displaying product
+– Natural eye contact with camera
+
+HANDS & PRODUCT:
+– Realistic hand movements during examination
+– Product handled with appropriate weight physics
+– Fingers trace product details naturally
+– Natural grip adjustments
+
+CAMERA:
+– POV-style or slight over-shoulder perspective
+– Very stable with subtle natural movement
+– Product and face both clearly visible
+
+FINAL RESULT:
+An authentic, emotionally compelling product reaction animation that captures genuine human response to receiving a product, perfect for influencer testimonial content.</div>
+          <div class="prompt-actions">
+            <button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button>
+            <button class="btn-expand-full" onclick="openModal('Unboxing — Reação ao Produto', this)">↗ Ver completo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════ SEÇÃO: TIKTOK SHOP ═══════════════ -->
+  <div class="section" data-category="tiktokshop">
+    <div class="section-header">
+      <div class="section-icon">🛍️</div>
+      <div class="section-title">TikTok Shop — Apresentação de Roupa</div>
+      <span class="section-count">50 prompts</span>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">19</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #01 — Giro com Toque na Cintura</span><span class="prompt-desc">Giro 3/4 com toque na cintura, olhar de volta à câmera</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, the woman slowly turns her body three quarters to the side, gently touches the dress at the waist, then looks back at the camera with a calm natural expression while the fabric moves naturally with her motion
+
+(A modelo gira lentamente para o lado, toca a cintura do vestido e olha novamente para a câmera enquanto o tecido acompanha o movimento.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #01 — Giro com Toque na Cintura', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">20</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #02 — Transferência de Peso e Rotação</span><span class="prompt-desc">Transferência de peso + alisamento da roupa + rotação dos ombros</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she shifts her weight from one leg to the other, smooths the front of the outfit with both hands, then performs a slight shoulder turn
+
+(A modelo transfere o peso entre as pernas, ajeita a roupa com as duas mãos e faz uma leve rotação dos ombros.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #02 — Transferência de Peso e Rotação', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">21</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #03 — Passo à Frente com Ajuste da Barra</span><span class="prompt-desc">Passo à frente, ajuste da barra e retorno do olhar</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a small step forward, briefly looks down at the outfit, adjusts the hem and returns her gaze to the camera
+
+(A modelo dá um pequeno passo à frente, olha para a roupa, ajeita a barra e volta a olhar para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #03 — Passo à Frente com Ajuste da Barra', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">22</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #04 — Virada Lateral com Puxada de Tecido</span><span class="prompt-desc">Tronco lateral com puxada leve do tecido para mostrar caimento</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she turns her torso to the side, places one hand near the hip and lightly pulls the fabric to demonstrate the fit
+
+(A modelo vira o tronco para o lado e puxa levemente o tecido para mostrar o caimento.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #04 — Virada Lateral com Puxada de Tecido', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">23</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #05 — Caminhada Natural com Parada</span><span class="prompt-desc">Caminhada lenta com balanço natural do tecido, parada frontal</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a slow natural walk, allowing the fabric to sway realistically before stopping and facing the camera
+
+(A modelo caminha lentamente enquanto a roupa balança naturalmente e depois para olhando para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #05 — Caminhada Natural com Parada', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">24</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #06 — Cabelo para Trás com Ajuste da Cintura</span><span class="prompt-desc">Joga o cabelo para trás e alisa a cintura da roupa</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gently brushes her hair back, lowers her hand and smooths the outfit near the waist
+
+(A modelo joga o cabelo para trás e depois ajeita a roupa na região da cintura.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #06 — Cabelo para Trás com Ajuste da Cintura', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">25</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #07 — Recuo com Postura e Toque Lateral</span><span class="prompt-desc">Meio passo para trás, correção de postura e toque lateral</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a half step back, straightens her posture and lightly brushes the fabric along her thigh
+
+(A modelo dá meio passo para trás, corrige a postura e passa a mão pela lateral da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #07 — Recuo com Postura e Toque Lateral', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">26</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #08 — Soltar Tecido para Mostrar Movimento</span><span class="prompt-desc">Segura e solta parte do vestido para demonstrar movimento do tecido</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gathers a small section of the dress with one hand and releases it naturally to demonstrate fabric movement
+
+(A modelo segura uma pequena parte do vestido e solta para mostrar o movimento natural do tecido.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #08 — Soltar Tecido para Mostrar Movimento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">27</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #09 — Ajuste de Manga e Virada Lateral</span><span class="prompt-desc">Ajuste de manga, ombros relaxados e leve virada lateral</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she adjusts a sleeve, relaxes her shoulders and turns slightly sideways
+
+(A modelo ajeita a manga da roupa e vira levemente o corpo para o lado.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #09 — Ajuste de Manga e Virada Lateral', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">28</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #10 — Pivô Lento em Múltiplos Ângulos</span><span class="prompt-desc">Pivô devagar sobre um pé mostrando a roupa em múltiplos ângulos</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly pivots on one foot, presenting the outfit from different angles before facing the camera again
+
+(A modelo gira devagar sobre um pé mostrando diferentes ângulos da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #10 — Pivô Lento em Múltiplos Ângulos', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">29</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #11 — Balanço Lateral com Toque na Saia</span><span class="prompt-desc">Balanço suave de lado a lado com toque na saia, contato visual</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gently sways from side to side while lightly touching the skirt area, maintaining eye contact with the camera
+
+(A modelo balança suavemente de um lado para o outro enquanto toca levemente a saia.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #11 — Balanço Lateral com Toque na Saia', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">30</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #12 — Meia Volta com Perfil e Toque no Tecido</span><span class="prompt-desc">Meia volta lenta, pausa no perfil lateral, toque no tecido</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a slow half turn, pauses to show the side profile of the outfit and lightly taps the fabric once
+
+(A modelo faz meia volta devagar, mostra o perfil da roupa e toca no tecido.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #12 — Meia Volta com Perfil e Toque no Tecido', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">31</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #13 — Aproximação da Câmera com Alisamento</span><span class="prompt-desc">Passo em direção à câmera e alisamento para baixo com ambas as mãos</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a small step toward the camera and smooths the outfit downward with both hands
+
+(A modelo caminha um pouco em direção à câmera e alisa a roupa com as duas mãos.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #13 — Aproximação da Câmera com Alisamento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">32</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #14 — Rotação Fluida Cabeça-Ombro-Quadril</span><span class="prompt-desc">Rotação fluida sequencial: cabeça → ombros → quadril</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she turns her head first, then shoulders, then hips in a smooth realistic body rotation
+
+(A modelo vira primeiro a cabeça, depois os ombros e por último o quadril.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #14 — Rotação Fluida Cabeça-Ombro-Quadril', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">33</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #15 — Levantamento do Vestido para Mostrar Formato</span><span class="prompt-desc">Levanta levemente o vestido para mostrar o formato, depois solta</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she lightly lifts part of the dress to demonstrate its shape and then gently lowers it
+
+(A modelo levanta levemente parte do vestido para mostrar o formato e depois solta.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #15 — Levantamento do Vestido para Mostrar Formato', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">34</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #16 — Mão na Cintura com Rotação do Tronco</span><span class="prompt-desc">Mão na cintura e rotação lenta do tronco em direção à câmera</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she places one hand on her waist and slowly rotates her torso back toward the camera
+
+(A modelo coloca a mão na cintura e gira lentamente o tronco em direção à câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #16 — Mão na Cintura com Rotação do Tronco', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">35</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #17 — Alisar Lateral e Pose Relaxada</span><span class="prompt-desc">Alisa a lateral da roupa e assume posição de pose relaxada</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gently smooths the side of the outfit and shifts into a relaxed pose
+
+(A modelo alisa a lateral da roupa e assume uma pose relaxada.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #17 — Alisar Lateral e Pose Relaxada', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">36</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #18 — Giro Elegante com Fluxo do Tecido</span><span class="prompt-desc">Giro elegante pequeno com tecido fluindo naturalmente</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a small elegant turn and allows the fabric to flow naturally before stopping
+
+(A modelo faz um giro elegante e deixa o tecido acompanhar naturalmente o movimento.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #18 — Giro Elegante com Fluxo do Tecido', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">37</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #19 — Ajuste de Alça e Exposição da Roupa</span><span class="prompt-desc">Ajuste da manga ou alça e virada do corpo para expor melhor a roupa</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she adjusts a strap or sleeve and turns her body slightly to display the outfit
+
+(A modelo ajusta a manga ou alça e vira o corpo para mostrar melhor a roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #19 — Ajuste de Alça e Exposição da Roupa', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">38</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #20 — Pivô com Postura Confiante</span><span class="prompt-desc">Pivô lento com retorno à câmera em postura calma e confiante</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly pivots and returns to face the camera with a calm confident posture
+
+(A modelo gira devagar e volta a encarar a câmera com postura confiante.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #20 — Pivô com Postura Confiante', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">39</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #21 — Mãos pelas Laterais e Contato Visual</span><span class="prompt-desc">Mãos pelas laterais destacando o caimento + mudança de stance</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she runs her hands lightly along the sides of the outfit, highlighting the fit and silhouette, then shifts her stance naturally and maintains relaxed eye contact with the camera
+
+(A modelo passa as mãos pelas laterais da roupa mostrando o caimento, muda levemente a posição do corpo e mantém contato visual natural com a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #21 — Mãos pelas Laterais e Contato Visual', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">40</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #22 — Inclinação e Revelação de Ângulo</span><span class="prompt-desc">Inclinação para examinar a peça + giro de tronco para novo ângulo</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she leans slightly forward to inspect the outfit, straightens up naturally and slowly turns her upper body to the side to reveal another angle of the garment
+
+(A modelo inclina levemente o corpo para observar a roupa, volta à postura normal e gira o tronco para mostrar outro ângulo.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #22 — Inclinação e Revelação de Ângulo', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">41</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #23 — Reposicionamento e Remoção de Dobra</span><span class="prompt-desc">Reposicionamento dos pés + remoção de dobra + olhar à câmera</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a small repositioning step, briefly glances down at the outfit, smooths a wrinkle with one hand and returns her gaze to the camera
+
+(A modelo reposiciona os pés, observa a roupa, remove uma pequena dobra do tecido e volta a olhar para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #23 — Reposicionamento e Remoção de Dobra', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">42</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #24 — Quadril Projetado com Pausa no Caimento</span><span class="prompt-desc">Quadril projetado lateralmente + toque na cintura + pausa de destaque</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she shifts one hip outward naturally, lightly touches the waist area of the outfit and pauses to showcase the overall fit
+
+(A modelo projeta levemente o quadril, toca a região da cintura e faz uma pausa para mostrar o caimento da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #24 — Quadril Projetado com Pausa no Caimento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">43</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #25 — Giro Frontal-Lateral com Mão no Tecido</span><span class="prompt-desc">Giro da vista frontal para lateral traçando o tecido com a mão</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly turns from front view to side view while tracing the fabric with one hand, allowing the material to move naturally with her rotation
+
+(A modelo gira da posição frontal para lateral enquanto passa a mão pelo tecido e o deixa acompanhar o movimento.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #25 — Giro Frontal-Lateral com Mão no Tecido', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">44</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #26 — Balanço Frente-Trás com Tecido em Movimento</span><span class="prompt-desc">Balança para frente e para trás uma vez criando movimento no tecido</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gently sways forward and backward once, creating realistic fabric movement before returning to a balanced neutral stance
+
+(A modelo balança suavemente para frente e para trás uma vez e depois retorna à posição neutra.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #26 — Balanço Frente-Trás com Tecido em Movimento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">45</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #27 — Ajuste Frontal com Tecido Caindo Natural</span><span class="prompt-desc">Ajusta a frente da roupa com as duas mãos e deixa o tecido cair</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she adjusts the front of the outfit with both hands, releases the fabric and allows it to settle naturally while maintaining a calm expression
+
+(A modelo ajeita a frente da roupa com as duas mãos e deixa o tecido cair naturalmente.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #27 — Ajuste Frontal com Tecido Caindo Natural', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">46</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #28 — Olhar por Cima do Ombro</span><span class="prompt-desc">Olhar sutil por cima do ombro, pausa breve e retorno frontal</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a subtle over-the-shoulder look, pauses briefly and then returns to face the camera directly
+
+(A modelo olha por cima do ombro, faz uma breve pausa e retorna à posição frontal.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #28 — Olhar por Cima do Ombro', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">47</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #29 — Segurar Lateral do Vestido e Mostrar Caimento</span><span class="prompt-desc">Segura lateral do vestido e gira para mostrar o caimento por ângulos</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she lightly holds one side of the dress and slowly rotates her torso to demonstrate how the fabric drapes from different angles
+
+(A modelo segura uma lateral do vestido e gira lentamente para mostrar o caimento do tecido.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #29 — Segurar Lateral do Vestido e Mostrar Caimento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">48</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #30 — Passo com Alisamento e Pose Confiante</span><span class="prompt-desc">Passo, alisamento de cima a baixo e pose final confiante</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a small step and gently smooths the outfit from top to bottom before holding a confident fashion pose
+
+(A modelo dá um pequeno passo, alisa a roupa de cima para baixo e assume uma pose confiante.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #30 — Passo com Alisamento e Pose Confiante', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">49</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #31 — Rotação dos Ombros com Transferência de Peso</span><span class="prompt-desc">Rotação dos ombros + mãos na cintura + transferência de peso</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly rotates her shoulders, places both hands near her waist and subtly shifts her weight to create a natural fashion stance
+
+(A modelo gira os ombros, coloca as mãos próximas à cintura e transfere o peso para uma das pernas.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #31 — Rotação dos Ombros com Transferência de Peso', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">50</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #32 — Sorriso com Toque na Coxa e Destaque da Roupa</span><span class="prompt-desc">Sorriso leve + toque na coxa + pose destacando o formato da peça</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she smiles softly, touches the fabric near her thigh and briefly poses to highlight the garment's shape
+
+(A modelo sorri levemente, toca o tecido próximo à perna e destaca o formato da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #32 — Sorriso com Toque na Coxa e Destaque da Roupa', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">51</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #33 — Pé à Frente com Silhueta em Destaque</span><span class="prompt-desc">Um pé à frente + leve giro para expor a silhueta da roupa</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she places one foot forward, turns her body slightly and holds a pose that clearly displays the silhouette of the outfit
+
+(A modelo coloca um pé à frente e gira levemente para mostrar a silhueta da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #33 — Pé à Frente com Silhueta em Destaque', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">52</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #34 — Cabelo para Trás e Pose Relaxada</span><span class="prompt-desc">Joga o cabelo para trás com uma mão e muda para pose relaxada</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she brushes her hair back with one hand and smoothly transitions into a relaxed standing pose
+
+(A modelo joga o cabelo para trás e muda para uma pose mais relaxada.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #34 — Cabelo para Trás e Pose Relaxada', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">53</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #35 — Giro Controlado com Pausa no Meio</span><span class="prompt-desc">Giro controlado para o lado oposto com pausa no meio do percurso</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a slow controlled turn toward the opposite side and pauses halfway through to showcase the garment
+
+(A modelo faz um giro lento e controlado, parando no meio para mostrar a roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #35 — Giro Controlado com Pausa no Meio', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">54</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #36 — Apertar e Soltar Tecido na Cintura</span><span class="prompt-desc">Aperta o tecido na cintura e solta para demonstrar elasticidade</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she gently presses the fabric near the waist and releases it, allowing realistic cloth movement to occur
+
+(A modelo aperta levemente o tecido na cintura e o solta para mostrar o movimento natural.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #36 — Apertar e Soltar Tecido na Cintura', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">55</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #37 — Ombro Relaxado com Detalhe da Roupa</span><span class="prompt-desc">Relaxa um ombro, mostra detalhe da peça e volta à posição neutra</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she relaxes one shoulder and uses one hand to demonstrate a small clothing detail before returning to a neutral pose
+
+(A modelo relaxa um ombro, mostra um detalhe da roupa e retorna à posição neutra.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #37 — Ombro Relaxado com Detalhe da Roupa', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">56</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #38 — Passo para Trás e Inclinação Natural</span><span class="prompt-desc">Passo para trás + inclinação leve para frente + retorno à postura</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a step back, leans slightly forward and then straightens up, creating a realistic shift in body weight
+
+(A modelo dá um passo para trás, inclina o corpo para frente e retorna à postura normal.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #38 — Passo para Trás e Inclinação Natural', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">57</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #39 — Queixo Erguido com Toque na Barra Elegante</span><span class="prompt-desc">Queixo levemente erguido + toque na barra em pose elegante</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she lifts her chin slightly and touches the hem of the outfit while holding an elegant pose
+
+(A modelo levanta levemente o queixo e toca a barra da roupa mantendo uma pose elegante.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #39 — Queixo Erguido com Toque na Barra Elegante', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">58</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #40 — Pivô com Tecido Fluindo nas Pernas</span><span class="prompt-desc">Pivô lento com tecido fluindo ao redor das pernas até parar</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she pivots slowly while the fabric moves around her legs and settles naturally as she comes to a stop
+
+(A modelo gira lentamente enquanto o tecido acompanha o movimento das pernas.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #40 — Pivô com Tecido Fluindo nas Pernas', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">59</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #41 — Toque na Cintura e Pose Confiante com Peso na Perna</span><span class="prompt-desc">Toque na cintura + giro de tronco + peso em uma perna + pose</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she lightly touches the waist area of the outfit with one hand, slowly turns her upper body toward the camera, shifts her weight onto one leg and holds a confident pose while the fabric settles naturally
+
+(A modelo toca levemente a cintura da roupa, gira o tronco em direção à câmera, transfere o peso para uma perna e mantém uma pose confiante.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #41 — Toque na Cintura e Pose Confiante com Peso na Perna', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">60</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #42 — Passo Lateral com Textura do Tecido</span><span class="prompt-desc">Passo lateral + mão traçando a textura + retorno natural à câmera</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she takes a small step to the side, brushes her hand along the fabric to highlight its texture, then slowly turns back toward the camera with natural posture and realistic cloth movement
+
+(A modelo dá um passo lateral, passa a mão pelo tecido para mostrar a textura e retorna lentamente para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #42 — Passo Lateral com Textura do Tecido', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">61</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #43 — Movimento do Quadril com Múltiplos Ângulos</span><span class="prompt-desc">Quadril se desloca suavemente + mão na cintura + rotação dos ombros</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she subtly shifts her hips from one side to the other, places one hand on her waist and slightly rotates her shoulders to present the outfit from multiple angles
+
+(A modelo movimenta discretamente o quadril, coloca uma mão na cintura e gira levemente os ombros para mostrar diferentes ângulos da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #43 — Movimento do Quadril com Múltiplos Ângulos', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">62</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #44 — Levantar Braço no Cabelo e Giro Suave</span><span class="prompt-desc">Levanta braço para ajeitar o cabelo + abaixa + giro suave do corpo</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly raises one arm to adjust her hair, lowers it naturally and performs a gentle body turn while maintaining a relaxed expression and realistic movement
+
+(A modelo levanta um braço para ajeitar o cabelo, abaixa naturalmente e faz um giro suave do corpo.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #44 — Levantar Braço no Cabelo e Giro Suave', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">63</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #45 — Olhar para Roupa, Alisar e Sorrir</span><span class="prompt-desc">Olha para a roupa + alisa a frente + levanta a cabeça + sorriso</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she glances down at the outfit, smooths the front section with one hand, lifts her head again and smiles softly toward the camera
+
+(A modelo olha para a roupa, alisa a parte frontal, levanta a cabeça novamente e sorri levemente para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #45 — Olhar para Roupa, Alisar e Sorrir', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">64</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #46 — Giro Gracioso com Perfil e Tecido Acompanhando</span><span class="prompt-desc">Giro gracioso e lento com exibição do perfil + retorno à câmera</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a graceful slow turn, briefly displaying her side profile, then returns to face the camera while the fabric follows naturally behind her movement
+
+(A modelo faz um giro elegante e lento, mostra rapidamente o perfil e retorna à posição frontal enquanto o tecido acompanha o movimento.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #46 — Giro Gracioso com Perfil e Tecido Acompanhando', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">65</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #47 — Ajuste no Quadril e Pose Equilibrada</span><span class="prompt-desc">Ajuste no quadril com as duas mãos + peso na perna de trás + pose</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she adjusts the outfit near her hips with both hands, shifts her weight onto the back leg and holds a balanced pose that highlights the fit of the garment
+
+(A modelo ajusta a roupa próximo ao quadril, transfere o peso para a perna de trás e mantém uma pose equilibrada.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #47 — Ajuste no Quadril e Pose Equilibrada', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">66</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #48 — Traçar Tecido com Giro para Revelar Caimento</span><span class="prompt-desc">Duas mãos traçando o tecido durante giro leve revelando o caimento</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she slowly traces the fabric with both hands while rotating her body slightly, allowing the material to move naturally and reveal its drape
+
+(A modelo passa as duas mãos pelo tecido enquanto gira levemente o corpo, mostrando o caimento da roupa.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #48 — Traçar Tecido com Giro para Revelar Caimento', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">67</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #49 — Entrada em Quadro, Ajuste e Olhar Confiante</span><span class="prompt-desc">Entra em quadro caminhando + para no centro + ajusta + olha confiante</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she walks naturally into frame, stops at the center, smooths the outfit once with both hands and looks directly into the camera with a confident expression
+
+(A modelo entra caminhando no enquadramento, para no centro, ajeita a roupa uma vez e encara a câmera com confiança.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #49 — Entrada em Quadro, Ajuste e Olhar Confiante', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+    <div class="prompt-card" data-category="tiktokshop animacao">
+      <div class="prompt-header" onclick="toggleCard(this)">
+        <div class="prompt-title-row"><span class="prompt-number">68</span><span class="prompt-title-wrap"><span class="prompt-title">WAN #50 — Giro Final Elegante com Passo e Pose Frontal</span><span class="prompt-desc">Giro elegante + toque no vestido + passo final + pose frontal encerramento</span></span></div>
+        <div class="prompt-tools"><span class="tool-tag" style="background:#1a1a2e;color:#a78bfa;border:1px solid #a78bfa33;">WAN</span></div>
+        <div class="expand-btn">▼</div>
+      </div>
+      <div class="prompt-body"><div class="prompt-body-inner">
+        <div class="prompt-text">realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion, she performs a soft elegant turn, gently touches the dress to demonstrate its drape, takes a small final step forward and ends in a balanced front facing pose with natural posture and realistic cloth motion
+
+(A modelo faz um giro elegante, toca suavemente o vestido para mostrar o caimento, dá um pequeno passo à frente e termina olhando para a câmera.)</div>
+        <div class="prompt-actions"><button class="btn-copy" onclick="copyPrompt(this)">📋 Copiar Prompt</button><button class="btn-expand-full" onclick="openModal('WAN #50 — Giro Final Elegante com Passo e Pose Frontal', this)">↗ Ver completo</button></div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="empty-state">
+    <div style="font-size: 36px; margin-bottom: 12px;">🔍</div>
+    <p>Nenhum prompt encontrado para "<span id="search-term"></span>"</p>
+  </div>
+
+</div><!-- /main -->
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Prompt</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <pre id="modal-text"></pre>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-copy" id="modal-copy-btn" onclick="copyFromModal()">📋 Copiar Prompt</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  Visual Prompts &nbsp;·&nbsp; Biblioteca de Prompts para Influencer IA &nbsp;·&nbsp; Todos os prompts em inglês para máxima compatibilidade com ferramentas de IA
+</footer>
+
+<script>
+  // ── TOGGLE CARD ──
+  function toggleCard(headerEl) {
+    const card = headerEl.closest('.prompt-card');
+    card.classList.toggle('open');
+  }
+
+  // ── COPY PROMPT ──
+  function copyPrompt(btn) {
+    const text = btn.closest('.prompt-body-inner').querySelector('.prompt-text').innerText;
+    const orig = btn.innerHTML;
+
+    function showSuccess() {
+      btn.innerHTML = '✅ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2200);
+    }
+
+    function fallbackCopy(str) {
+      const ta = document.createElement('textarea');
+      ta.value = str;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); showSuccess(); }
+      catch(e) { btn.innerHTML = '⚠️ Erro ao copiar'; setTimeout(() => { btn.innerHTML = orig; }, 2200); }
+      document.body.removeChild(ta);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showSuccess).catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  // ── MODAL ──
+  let modalText = '';
+
+  function openModal(title, btn) {
+    const text = btn.closest('.prompt-body-inner').querySelector('.prompt-text').innerText;
+    modalText = text;
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-text').textContent = text;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.getElementById('modal-copy-btn').innerHTML = '📋 Copiar Prompt';
+    document.getElementById('modal-copy-btn').classList.remove('copied');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  function copyFromModal() {
+    const btn = document.getElementById('modal-copy-btn');
+
+    function showSuccess() {
+      btn.innerHTML = '✅ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerHTML = '📋 Copiar Prompt'; btn.classList.remove('copied'); }, 2200);
+    }
+
+    function fallbackCopy(str) {
+      const ta = document.createElement('textarea');
+      ta.value = str;
+      ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); showSuccess(); }
+      catch(e) { btn.innerHTML = '⚠️ Erro ao copiar'; setTimeout(() => { btn.innerHTML = '📋 Copiar Prompt'; }, 2200); }
+      document.body.removeChild(ta);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(modalText).then(showSuccess).catch(() => fallbackCopy(modalText));
+    } else {
+      fallbackCopy(modalText);
+    }
+  }
+
+  // ── CATEGORY FILTER ──
+  document.getElementById('cat-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterContent(document.getElementById('search-input').value, btn.dataset.cat);
+  });
+
+  // ── SEARCH ──
+  document.getElementById('search-input').addEventListener('input', e => {
+    const cat = document.querySelector('.cat-btn.active').dataset.cat;
+    filterContent(e.target.value, cat);
+  });
+
+  function filterContent(query, cat) {
+    const q = query.toLowerCase().trim();
+    const cards = document.querySelectorAll('.prompt-card');
+    const sections = document.querySelectorAll('.section[data-category]');
+    let anyVisible = false;
+
+    cards.forEach(card => {
+      const cardCat = (card.dataset.category || '').toLowerCase();
+      const title = card.querySelector('.prompt-title').textContent.toLowerCase();
+      const body = card.querySelector('.prompt-text').textContent.toLowerCase();
+
+      const catMatch = cat === 'all' || cardCat.includes(cat);
+      const textMatch = !q || title.includes(q) || body.includes(q);
+
+      const visible = catMatch && textMatch;
+      card.style.display = visible ? '' : 'none';
+      if (visible) anyVisible = true;
+    });
+
+    // Show/hide sections based on visible cards
+    sections.forEach(sec => {
+      const secCat = (sec.dataset.category || '').toLowerCase();
+      const catMatch = cat === 'all' || secCat === cat || secCat.includes(cat);
+      const hasVisible = [...sec.querySelectorAll('.prompt-card')].some(c => c.style.display !== 'none');
+      sec.style.display = (catMatch || hasVisible) && hasVisible ? '' : 'none';
+    });
+
+    // Show/hide dividers
+    document.querySelectorAll('.divider').forEach(d => d.style.display = anyVisible ? '' : 'none');
+
+    // Empty state
+    const empty = document.getElementById('empty-state');
+    document.getElementById('search-term').textContent = q;
+    empty.classList.toggle('visible', !anyVisible);
+  }
+
+  // ── ESC KEY ──
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
