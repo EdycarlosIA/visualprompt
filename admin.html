@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVZ Admin — Gerenciar Prompts</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   MVZ Prompts — Arquivo de dados
+   ✏️  Para adicionar ou editar prompts, altere este arquivo.
+   📦  Salve e recarregue o index.html — as mudanças aparecem
+       automaticamente na biblioteca.
+   ═══════════════════════════════════════════════════════════════ */
+
+const PROMPTS_DATA = {
+  "meta": {
+    "title": "MVZ Prompts",
+    "description": "Biblioteca de Prompts para Influencer IA",
+    "version": "1.0.0",
+    "updated": "2026-06-08"
+  },
+  "auth": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "categories": [
+    {
+      "id": "influencer",
+      "label": "Influencer",
+      "icon": "👤",
+      "description": "Criação de rosto e corpo da influencer IA"
+    },
+    {
+      "id": "animacao",
+      "label": "Animação",
+      "icon": "🎬",
+      "description": "Animações realistas de movimento"
+    },
+    {
+      "id": "gancho",
+      "label": "Ganchos",
+      "icon": "🪝",
+      "description": "Ganchos de abertura para vídeos"
+    },
+    {
+      "id": "troca-roupa",
+      "label": "Troca de Roupa",
+      "icon": "👗",
+      "description": "Troca de outfit com identidade preservada"
+    },
+    {
+      "id": "cenario",
+      "label": "Cenário",
+      "icon": "🏠",
+      "description": "Troca de ambiente e localização"
+    },
+    {
+      "id": "cta",
+      "label": "CTA",
+      "icon": "📣",
+      "description": "Call to action e gestos de engajamento"
+    },
+    {
+      "id": "unboxing",
+      "label": "Unboxing",
+      "icon": "📦",
+      "description": "Vídeos de abertura e reação a produtos"
+    },
+    {
+      "id": "cabelo",
+      "label": "Cabelo",
+      "icon": "💇",
+      "description": "Animação focada em movimento de cabelo"
+    }
+  ],
+  "prompts": [
+    {
+      "id": 1,
+      "title": "Criando o Rosto da Influencer",
+      "category": "influencer",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Gera o rosto ultrarrealista da influencer a partir de duas imagens de referência.",
+      "body": "Crie uma imagem ultrarrealista de uma influenciadora digital brasileira de IA, usando duas imagens de referência enviadas pelo usuário.\n\nUse a Imagem 1 como referência principal do rosto. Analise cuidadosamente formato facial, proporções, tom de pele, textura da pele, sobrancelhas, olhos, nariz, boca, queixo, expressão, cabelo visível, ângulo facial e identidade visual geral.\n\nUse a Imagem 2 apenas como apoio para coerência corporal, tom geral, estilo e presença visual, sem perder o foco principal no rosto.\n\nCrie uma foto de rosto estilo retrato 3x4 profissional, com a influenciadora olhando diretamente para a câmera, rosto mais próximo da câmera, enquadramento do topo da cabeça até a parte superior dos ombros. A imagem deve priorizar máximo detalhamento facial, naturalidade e realismo.\n\nA influenciadora deve parecer uma pessoa real, brasileira, com aparência humana autêntica, sem estética artificial. A pele deve ter poros visíveis, textura natural, pequenas variações de tom, leves imperfeições humanas, expressão confiante, simpática e espontânea.\n\nAMBIENTE:\nCenário natural, simples e realista, com fundo neutro ou quarto brasileiro discreto levemente desfocado. Nada artificial, nada futurista, nada com aparência de estúdio falso.\n\nILUMINAÇÃO:\nLuz natural suave, realista, vindo de uma janela, com sombras delicadas no rosto, brilho natural nos olhos e alta definição nos detalhes faciais.\n\nREGRAS OBRIGATÓRIAS:\n– Criar uma influenciadora digital brasileira de IA\n– Usar a Imagem 1 como referência principal do rosto\n– Usar a Imagem 2 como apoio de coerência visual\n– Foto de rosto próxima da câmera\n– Estilo retrato 3x4 realista\n– Olhando diretamente para a câmera\n– Alta nitidez no rosto e nos olhos\n– Aparência natural, humana e brasileira\n– Olhos somente castanhos ou pretos\n– Proibido olhos azuis, verdes ou cinzas\n– Não adicionar texto, logo ou marca d'água\n\nINSTRUÇÕES NEGATIVAS:\nNão criar rosto genérico de IA. Não criar pele plástica. Não suavizar demais a pele. Não criar aparência de boneca. Não criar estética 3D, CGI, anime, cartoon ou ilustração. Não distorcer olhos, boca, nariz, rosto ou cabelo. Não criar fundo artificial. Não usar filtros exagerados.\n\nRESULTADO FINAL:\nUma foto de rosto ultrarrealista, estilo 3x4 profissional, de uma influenciadora digital brasileira de IA, com forte semelhança ao rosto da Imagem 1, olhando para a câmera, em cenário natural e com qualidade fotográfica premium."
+    },
+    {
+      "id": 2,
+      "title": "Criando o Corpo da Influencer",
+      "category": "influencer",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Gera o corpo inteiro 9:16 combinando rosto de uma referência e corpo de outra.",
+      "body": "Crie uma fotografia ultrarrealista vertical 9:16 de uma influenciadora digital brasileira de IA em corpo inteiro, dos pés à cabeça, usando duas imagens de referência enviadas pelo usuário.\n\nA Imagem 1 é a referência principal e obrigatória do rosto da influenciadora. Analise e preserve com máxima fidelidade o rosto da Imagem 1: formato facial, identidade visual, proporções, tom de pele, textura da pele, olhos, sobrancelhas, nariz, boca, queixo, cabelo, expressão, idade aparente e aparência geral. Não altere o rosto principal. Não recrie outro rosto. Não suavize demais. Não deixe genérico.\n\nA Imagem 2 é a referência principal do corpo, pose e proporções físicas. Analise o tipo corporal, altura aparente, silhueta, postura, ombros, cintura, quadril, braços, pernas, mãos, pés, posição do corpo, roupa e linguagem corporal.\n\nCENÁRIO OBRIGATÓRIO:\nQuarto fechado, simples, natural e realista, com aparência brasileira. Fundo limpo e discreto, parede neutra, cama simples, cortina, guarda-roupa ou poucos elementos reais de quarto. Não usar varanda, sala aberta, janela panorâmica, vista de cidade, fundo externo ou ambiente luxuoso artificial.\n\nREGRAS OBRIGATÓRIAS:\n– Usar Imagem 1 como rosto definitivo\n– Usar Imagem 2 como corpo, pose e proporção de referência\n– Corpo inteiro dos pés à cabeça\n– Formato vertical 9:16\n– Influenciadora brasileira de IA\n– Em pé, olhando para a câmera\n– Quarto fechado, simples e realista\n– Olhos somente castanhos ou pretos\n– Sem texto, logo ou marca d'água\n\nINSTRUÇÕES NEGATIVAS:\nNão trocar o rosto da Imagem 1. Não modificar a identidade facial. Não criar corpo aleatório ignorando a Imagem 2. Não criar aparência de montagem. Não cortar cabeça ou pés. Não deformar mãos, dedos, pernas, braços, pés, rosto ou cabelo. Não criar cenário aberto. Não usar fundo externo. Não criar pele plástica.\n\nRESULTADO FINAL:\nUma fotografia vertical 9:16 ultrarrealista e profissional de uma influenciadora digital brasileira de IA em corpo inteiro, dentro de um quarto fechado simples e natural, olhando para a câmera, com qualidade premium e aparência indistinguível de uma fotografia real."
+    },
+    {
+      "id": 3,
+      "title": "Gancho 1 — Apresentação POV Natural",
+      "category": "gancho",
+      "tags": [
+        "Flow",
+        "Freepik",
+        "Grok"
+      ],
+      "description": "Animação POV onde a influencer se aproxima da câmera e toca delicadamente um detalhe da roupa.",
+      "body": "Animate the subject as a REAL person presenting clothing in a POV-style video.\n\n🔥 START OF ANIMATION (UPDATED):\n– The subject starts at a natural distance from the camera\n– She calmly takes two small, natural steps forward toward the camera\n– While approaching, she gently touches and lightly holds the bow/lace detail on the chest area\n– The gesture is delicate, subtle and realistic, like naturally showing a clothing detail\n– No emphasis, no posing, no exaggeration\n– The movement feels spontaneous and casual\n– After briefly touching the bow, she naturally releases it\n– She takes a small step back to her original position\n– Smooth transition into the rest of the animation\n\nGENERAL MOTION STYLE:\n– Natural, confident, fluid movements\n– Not static / Not exaggerated / Not robotic\n– Real human timing\n\nBODY MOVEMENTS:\n– One hand naturally rests on the waist\n– Gentle hip movement (side-to-side, very subtle)\n– One foot forward, the other relaxed behind\n– Natural posture, relaxed shoulders\n\nCLOTHING PRESENTATION:\n– Small, natural movements to highlight the outfit\n– Slight torso rotation to show fit and fabric\n– No aggressive posing / No fashion runway exaggeration\n– Movements feel spontaneous and casual\n\nFACIAL EXPRESSION (VERY IMPORTANT – REAL HUMAN TIMING):\n– The subject does NOT smile continuously\n– Facial expression alternates naturally throughout the video\n– While approaching: neutral, relaxed expression, lips softly closed\n– During the bow/lace touch: a brief, subtle smile appears\n– After releasing: expression returns to neutral\n– Later: she gently turns her head slightly to one side, a short warm smile appears\n\nPERSONALITY:\n– Sympathetic / Approachable / Comfortable\n– Feels like a real person casually recording a video\n\nCAMERA & POV:\n– POV perspective, as if the phone is held by a person\n– Very subtle handheld micro-movements\n– No camera shake / No zoom\n– Camera remains at chest/face height\n\nREALISM RULES:\n– Preserve original facial identity\n– Preserve skin texture\n– Preserve hair movement (slight natural motion)\n– Natural fabric physics\n– No beauty filters / No smoothing / No stylization\n\nRESTRICTIONS:\n– No talking / No text / No UI / No effects\n– No exaggerated dance / No influencer posing clichés\n\nFINAL RESULT:\nA hyper-realistic POV fashion video where the subject feels alive and human, with natural facial expression changes, occasional soft smiles, neutral moments in between, and subtle head turns — indistinguishable from a real casual phone recording."
+    },
+    {
+      "id": 4,
+      "title": "Gancho Jogar Roupa 1 — Cobrindo a Lente",
+      "category": "gancho",
+      "tags": [
+        "Flow",
+        "Freepik",
+        "Grok"
+      ],
+      "description": "A influencer caminha em direção à câmera e cobre a lente com a peça de roupa para criar uma transição orgânica.",
+      "body": "Animate the subject as a REAL person presenting clothing in a POV-style fashion video.\n\n🔥 START OF ANIMATION (HOOK TRANSITION VERSION):\n– The subject starts standing naturally at a comfortable distance from the camera\n– She is already holding the clothing/product naturally with both hands in front of the body\n– Neutral relaxed posture / Soft natural facial expression\n– She calmly takes two small natural steps forward toward the camera\n– The clothing naturally moves together with her body\n– Arms remain relaxed and realistic\n– Natural fabric movement and gravity behavior\n\n🔥 MAIN HOOK ACTION (CRITICAL):\n– As she gets closer to the camera:\n  • she smoothly raises the clothing/product forward toward the lens\n  • the clothing gradually occupies more of the frame\n  • movement feels natural and continuous\n  • no aggressive motion / no throwing action\n– The clothing must FULLY cover the camera lens naturally\n– The transition happens by the clothing physically reaching the camera\n– The fabric fills the entire frame progressively\n\nIMPORTANT:\n– The subject does NOT toss the clothing\n– The subject does NOT shake the clothing aggressively\n– The movement is smooth, controlled and realistic\n– The clothing behaves with natural fabric physics while moving forward\n– During the forward movement: a subtle soft smile appears briefly\n\nPRODUCT/FABRIC REALISM:\n– Realistic fabric weight / Natural hanging behavior\n– Subtle wrinkles and folds\n– Slight fabric compression from fingers\n– Natural gravity pull / No stiff fabric / No floating product\n\nCAMERA & POV:\n– POV-style camera\n– Very subtle handheld micro movement only\n– No zoom / No camera shake\n– Camera remains fixed in position\n– Real smartphone recording feeling\n\nRESTRICTIONS:\n– No talking / No text / No UI / No effects\n– Transition must happen ONLY through the clothing covering the lens\n\nFINAL RESULT:\nA hyper-realistic POV-style fashion video where the subject naturally walks toward the camera holding a clothing product, then smoothly brings the fabric directly into the lens until it fully covers the frame, creating a realistic organic transition identical to a real influencer clothing hook video filmed on a smartphone."
+    },
+    {
+      "id": 5,
+      "title": "Gancho Jogar Roupa 2 — Movimento Suave",
+      "category": "gancho",
+      "tags": [
+        "Flow",
+        "Freepik",
+        "Grok"
+      ],
+      "description": "Versão corrigida do gancho de roupa, com foco em movimento calmo e boca fechada.",
+      "body": "The subject must move naturally and calmly.\n\nDo NOT rush aggressively toward the camera.\nDo NOT run. Do NOT lunge forward.\nDo NOT create chaotic movement.\nDo NOT create exaggerated fast motion.\n\nThe hook should feel smooth and controlled like a real casual influencer recording.\n\nCORRECT MOVEMENT FLOW:\n– The subject starts already holding the clothing/product naturally\n– She takes ONE natural small step forward\n– While stepping forward, she smoothly raises the clothing toward the camera\n– The movement is fluid and continuous\n– Calm natural pacing / No sudden acceleration\nThe clothing should reach the camera naturally within around 1–2 seconds.\n\nIMPORTANT:\n– The subject body movement stays relaxed\n– Natural shoulder movement / Natural arm motion\n– Natural posture balance\n– No exaggerated hip movement / No dramatic motion\n\nFACIAL BEHAVIOR FIX (VERY IMPORTANT):\n– Mouth must remain naturally closed most of the time\n– Do NOT generate talking behavior\n– Do NOT simulate speech / Do NOT create lip-sync motion\n– No random mouth opening / No exaggerated facial animation\n\nExpression should remain:\n• soft / neutral / relaxed / natural\n\nA very subtle smile is allowed briefly, but:\n– lips mostly closed\n– no visible talking motion\n– no exaggerated grin\n\nMOTION QUALITY:\n– Real-time natural motion\n– No slow motion / No delay / No laggy movement\n– No robotic timing / No jitter / No frame skipping / No looping behavior\n\nCAMERA:\n– Stable POV camera\n– Very subtle handheld micro movement only\n– No zoom / No cinematic motion / No shake\n\nFINAL FEELING:\nThe animation should feel like a real girl casually stepping forward and softly placing the clothing in front of the phone camera for a natural TikTok-style transition."
+    },
+    {
+      "id": 6,
+      "title": "Animação Corpo Inteiro — Movimento Fluido",
+      "category": "animacao",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Anima uma imagem estática com movimento corporal completo e naturalidade.",
+      "body": "Animate this image as a hyper-realistic full-body video of a real human being.\n\nBODY ANIMATION:\n– Natural, fluid full-body movement\n– Subtle weight shifting from foot to foot\n– Gentle sway in the torso\n– Arms moving slightly with body rhythm\n– Natural breathing visible in chest and shoulders\n– Realistic balance and center of gravity\n– No robotic or mechanical movement / No loop artifacts\n\nCLOTHING ANIMATION:\n– Fabric moves naturally with body\n– Realistic physics: weight, drape, wrinkle formation\n– Slight fabric compression and release with movement\n– Natural gravity pull on all clothing elements\n– Hair moves with subtle natural sway\n\nFACIAL ANIMATION:\n– Eyes blink naturally (every 3–5 seconds)\n– Subtle eye movement (not fixed stare)\n– Micro expressions: slight eyebrow movement\n– Natural skin movement with facial muscles\n– Lips relaxed, closed, no talking\n\nSKIN & TEXTURE:\n– Preserve original skin texture and pores\n– No smoothing, no beautification filters\n– Realistic skin tone consistency\n– Natural lighting response with movement\n\nQUALITY RULES:\n– Hyper-realistic output\n– No cartoon / No CGI look\n– No face distortion\n– No body proportion changes\n– Preserve original identity 100%"
+    },
+    {
+      "id": 7,
+      "title": "Animação Cabelo — Movimento Natural",
+      "category": "cabelo",
+      "tags": [
+        "Flow",
+        "Kling"
+      ],
+      "description": "Foca a animação no comportamento hiper-realista do cabelo com física de fios individuais.",
+      "body": "Animate this image focusing on ultra-realistic hair movement.\n\nHAIR ANIMATION (PRIMARY FOCUS):\n– Natural hair movement with subtle air/breeze simulation\n– Individual strand behavior (not block movement)\n– Realistic hair physics: weight, bounce, elasticity\n– Slight delay in hair movement after body motion stops\n– Natural layering: outer strands move more than inner\n– Hair falls naturally with gravity\n– No stiff or plastic-looking hair\n– No hair clipping through body or clothing\n\nHAIR TYPES HANDLING:\n– Long straight: gentle waves and slight lift at tips\n– Curly/wavy: spring-like bounce with each movement\n– Short hair: subtle movement with slight drift\n– Bangs/fringe: light flutter with natural fall-back\n\nSUPPORTING BODY MOVEMENT:\n– Subtle head turns to trigger hair motion\n– Gentle nodding or tilting\n– Natural posture shifts\n\nREALISM REQUIREMENTS:\n– Preserve hair color, highlights and texture exactly\n– No hair color changes / No sudden hair shape changes\n– Smooth continuous motion / No looping artifacts\n– No hair merging or melting\n\nFINAL RESULT:\nHair movement that is indistinguishable from a real video, with each strand responding naturally to physics, gravity and subtle body movement."
+    },
+    {
+      "id": 8,
+      "title": "OOTD Espelho — Apresentação de Roupa",
+      "category": "animacao",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Vídeo de selfie no espelho estilo OOTD com rotação para mostrar o outfit completo.",
+      "body": "Animate this image as a hyper-realistic OOTD mirror selfie video.\n\nSCENE SETUP:\n– The subject is standing in front of a mirror\n– She holds the phone naturally to film herself in the mirror\n– POV-style: camera is the phone she is holding\n– The reflection in the mirror is her full body\n– Room background: simple, natural, realistic bedroom or bathroom\n\nANIMATION FLOW:\n– She starts in a natural standing pose looking at her reflection\n– Slowly rotates her body 90 degrees to one side to show the outfit silhouette\n– Pauses briefly showing the side profile\n– Smoothly rotates back to face the mirror\n– Slight lean forward to look at a clothing detail\n– Returns to neutral standing pose\n– Subtle weight shift throughout\n\nCLOTHING SHOWCASE:\n– Movements designed to naturally show the full outfit\n– Fabric drape and fit visible during rotation\n– Natural clothing physics during movement\n– No aggressive posing / No fashion runway behavior\n\nMIRROR REFLECTION REALISM:\n– The reflection must move in perfect sync with the subject\n– Correct mirror physics (reversed image)\n– Natural lighting on both subject and reflection\n– Subtle depth of field: subject sharper than background\n– Realistic mirror surface (no distortion)\n\nFINAL RESULT:\nA hyper-realistic OOTD mirror selfie video that looks exactly like a real girl filming herself trying on an outfit, indistinguishable from a genuine TikTok/Reels mirror video."
+    },
+    {
+      "id": 9,
+      "title": "Espelho — Giro 360° de Roupa",
+      "category": "animacao",
+      "tags": [
+        "Flow",
+        "Kling"
+      ],
+      "description": "Rotação completa 360° para mostrar o outfit de todos os ângulos.",
+      "body": "Animate this image as a hyper-realistic 360 outfit turn mirror video.\n\nCORE ACTION:\n– The subject performs a slow, smooth 360-degree full body turn\n– Turn is continuous and natural, not mechanical\n– She starts facing the mirror/camera\n– Rotates to show left profile → back → right profile → returns to front\n– Total turn takes approximately 3–4 seconds\n– Movement is elegant and controlled\n\nDURING THE TURN:\n– Arms stay naturally at her sides or slightly extended\n– Clothing flows naturally during rotation\n– Hair moves with the turn following natural physics\n– Body weight shifts naturally with the rotation\n– Feet pivot naturally on the floor\n\nCLOTHING DURING TURN:\n– Full outfit visible from all angles\n– Fabric and drape shown realistically\n– Natural physics: skirts flare slightly, fabric moves with rotation\n– Fit and silhouette clearly visible from every angle\n\nFACIAL EXPRESSION:\n– Confident, natural expression throughout\n– Brief glance at the mirror as she passes the front\n– No exaggerated smiling\n– Natural eye movement\n\nFINAL RESULT:\nA smooth, realistic 360-degree outfit turn that showcases the complete clothing from every angle, identical to a real influencer trying on clothes in front of a mirror."
+    },
+    {
+      "id": 10,
+      "title": "CTA — Apontar para a Tela",
+      "category": "cta",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Gesto de apontar direto para a câmera como call to action de engajamento.",
+      "body": "Animate this image with a hyper-realistic CTA pointing gesture for a fashion/product video.\n\nCTA ACTION:\n– The subject raises one arm naturally toward the camera\n– She points her finger directly at the camera/viewer\n– The gesture is confident but friendly, not aggressive\n– Arm raises smoothly from a resting position\n– Finger points at camera for 1–2 seconds\n– Arm naturally lowers back after the gesture\n\nGESTURE DETAILS:\n– The pointing arm moves with natural muscle physics\n– Slight shoulder raise as arm extends\n– Natural elbow bend during the motion\n– Finger clearly extended pointing forward\n– Rest of hand relaxed (not stiff)\n– Other arm remains naturally at side or on waist\n\nFACIAL EXPRESSION DURING CTA:\n– Direct eye contact with camera as she points\n– Confident, warm smile appears during the gesture\n– Eyebrows slightly raised (engaging expression)\n– Expression returns to neutral after gesture completes\n– No exaggerated acting\n\nBODY LANGUAGE:\n– Slight forward lean toward camera during pointing\n– Confident posture\n– Natural weight shift\n– Movement feels spontaneous and engaging\n\nFINAL RESULT:\nA natural, engaging CTA pointing gesture that looks like a real influencer directing their audience to click/shop/follow, indistinguishable from a real video recording."
+    },
+    {
+      "id": 11,
+      "title": "CTA — Gesto de Swipe Up",
+      "category": "cta",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Animação do gesto de swipe up para redirecionar audiência em Stories e Reels.",
+      "body": "Animate this image with a hyper-realistic swipe-up gesture CTA for social media.\n\nSWIPE UP ACTION:\n– The subject raises one hand toward the bottom of the frame\n– Makes a natural upward swiping gesture with her finger or full hand\n– Gesture mimics the classic swipe up to shop social media action\n– Motion is smooth, fluid, and natural\n– Gesture repeats once or twice naturally\n– Hand returns to natural position after\n\nHAND AND ARM DETAILS:\n– Natural hand anatomy (realistic fingers, no distortion)\n– Arm movement follows natural shoulder and elbow mechanics\n– Wrist rotates slightly during the upward swipe\n– Fingers relaxed but purposeful during gesture\n– Speed: moderate, not too fast, not too slow\n\nFACIAL EXPRESSION:\n– Engaging, warm smile during the gesture\n– Eye contact with camera maintained\n– Slightly raised eyebrows (inviting expression)\n– Expression is friendly and persuasive\n\nSUPPORTING BODY:\n– Slight forward body lean during gesture\n– Other hand naturally on waist or at side\n– Confident posture throughout\n\nFINAL RESULT:\nA realistic, engaging swipe-up CTA gesture that looks exactly like a real influencer directing their audience to interact with content on Instagram Stories, TikTok or Reels."
+    },
+    {
+      "id": 12,
+      "title": "Troca de Roupa — Mesmo Cenário",
+      "category": "troca-roupa",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Recria a mesma pessoa com uma roupa diferente mantendo o mesmo cenário e identidade.",
+      "body": "Using the reference image provided, recreate the same person wearing the new clothing/outfit described below.\n\nIDENTITY PRESERVATION (MANDATORY):\n– Preserve 100% facial identity from the reference image\n– Same face: structure, proportions, skin tone, features, expression style\n– Same body type and proportions\n– Same hair: color, length, texture, style\n– No face changes / No identity swap\n\nNEW CLOTHING:\n[DESCREVA A ROUPA AQUI]\n– Realistic fabric rendering\n– Natural clothing drape and fit\n– Correct clothing physics for the body type\n– Realistic wrinkles and folds\n\nSCENE:\n– Same background/environment as reference image\n– Same lighting direction and quality\n– Same camera angle and framing\n– Seamless integration — no visible compositing\n\nPOSE:\n– Same or very similar pose to reference image\n– Natural standing or requested pose\n– Body proportions unchanged\n\nQUALITY:\n– Ultra-realistic DSLR photo quality\n– High resolution\n– Sharp face and clothing details\n– No visible AI artifacts\n– No smoothing filters\n\nOUTPUT:\nA photorealistic image of the same person from the reference image, now wearing the new outfit, in the same scene, with identical identity and quality indistinguishable from a real photograph."
+    },
+    {
+      "id": 13,
+      "title": "Troca de Roupa — Múltiplos Looks",
+      "category": "troca-roupa",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Gera múltiplas variações de outfit da mesma pessoa com consistência de identidade.",
+      "body": "Using the reference image, create [NUMBER] variations of the same person wearing different outfits.\n\nIDENTITY PRESERVATION (MANDATORY FOR ALL VARIATIONS):\n– Preserve 100% facial identity across ALL variations\n– Same face, body, hair in every single image\n– No identity drift between variations\n– All images must look like the same real person\n\nVARIATIONS REQUESTED:\nVariation 1: [DESCREVA O LOOK 1]\nVariation 2: [DESCREVA O LOOK 2]\nVariation 3: [DESCREVA O LOOK 3]\n\nCONSISTENCY RULES:\n– Same lighting quality across all variations\n– Same or similar background\n– Same framing and camera angle\n– Consistent skin tone / Consistent hair appearance\n\nCLOTHING REALISM FOR EACH VARIATION:\n– Realistic fabric for each clothing type\n– Natural fit and drape for each outfit\n– Proper clothing physics / Realistic shadows and highlights\n\nOUTPUT FORMAT:\n[NUMBER] separate photorealistic images, each showing the same person in a different outfit, all with identical quality and identity preservation, forming a cohesive content set for social media."
+    },
+    {
+      "id": 14,
+      "title": "Troca de Cenário — Ambiente Fechado",
+      "category": "cenario",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Coloca a mesma pessoa em um novo ambiente interno preservando roupa e identidade.",
+      "body": "Using the reference image, place the same person in a new background/scene while preserving complete identity.\n\nNEW SCENE:\n[DESCREVA O NOVO AMBIENTE/CENÁRIO AQUI]\n\nIDENTITY PRESERVATION (MANDATORY):\n– Preserve 100% facial identity: face, features, skin tone, hair\n– Same body and proportions\n– Same clothing as in the reference image (preserve exactly)\n– Only the background changes\n\nSCENE INTEGRATION RULES:\n– Realistic lighting matching the new environment\n– Correct shadows on body and clothing from the new light source\n– Realistic ground shadows/feet placement\n– No floating subject / Natural perspective matching\n– No visible compositing edge\n\nENVIRONMENTAL REALISM:\n– High quality background rendering\n– Correct depth of field (subject in focus, background slightly softer)\n– Realistic ambient lighting\n– No background clipping or artifacts\n\nFINAL RESULT:\nA photorealistic image of the same person from the reference, placed naturally in the new scene, indistinguishable from a real photograph taken at that location."
+    },
+    {
+      "id": 15,
+      "title": "Troca de Cenário — Externo / Outdoor",
+      "category": "cenario",
+      "tags": [
+        "ChatGPT",
+        "Gemini"
+      ],
+      "description": "Recria a influencer em ambiente externo com iluminação natural coerente.",
+      "body": "Using the reference image, recreate the same person in an outdoor setting with full identity preservation.\n\nOUTDOOR SCENE:\n[DESCREVA O AMBIENTE EXTERNO: praia, parque, rua, cidade, campo, etc.]\n\nIDENTITY PRESERVATION (MANDATORY):\n– Preserve 100% facial identity\n– Same face, hair and body from reference\n– Same or described clothing\n– Natural outdoor skin tone response (no over-brightening)\n\nOUTDOOR LIGHTING:\n– Natural daylight/golden hour/overcast (specify preferred)\n– Realistic sun direction creating natural shadows\n– Correct highlight and shadow on face and body\n– Natural outdoor ambient color temperature\n– No artificial studio lighting look in outdoor scene\n\nENVIRONMENTAL INTEGRATION:\n– Natural ground (grass, sand, pavement, etc.) under feet\n– Realistic depth: foreground, subject, background layers\n– Natural color grading for outdoor setting\n– Wind effect on hair and light fabrics (if applicable)\n\nFINAL RESULT:\nA photorealistic outdoor portrait of the same person from the reference image, naturally placed in the described outdoor environment, with professional editorial quality indistinguishable from a real outdoor photo shoot."
+    },
+    {
+      "id": 16,
+      "title": "Unboxing POV — Abertura de Caixa",
+      "category": "unboxing",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Vídeo POV de unboxing com física realista de embalagem, mãos e reação emocional.",
+      "body": "Animate this image as a hyper-realistic unboxing video.\n\nUNBOXING ANIMATION:\n– The subject holds a package/box naturally in both hands\n– She carefully opens the box with natural finger movements\n– Realistic hand and finger physics throughout\n– The box opens smoothly revealing contents inside\n– She looks inside with natural curiosity expression\n– She may remove the tissue paper or filler material\n– She reaches in and carefully removes the main product\n– She holds the product up toward the camera to show it\n– Natural handling: product weight visible in arm/wrist movement\n\nHAND AND PRODUCT PHYSICS:\n– Realistic hand grip and finger positioning\n– Natural wrist movement when handling objects\n– Product weight behavior: heavier items affect arm position\n– Tissue paper or packaging material moves naturally (crinkle physics)\n– Box flaps open with realistic cardboard physics\n\nFACIAL EXPRESSION FLOW:\n– Beginning: neutral, slightly excited anticipation\n– During opening: focused, natural curiosity\n– On reveal: genuine surprise/happiness reaction\n– Showing product: confident, satisfied smile\n– Expressions are subtle and human, not theatrical\n\nCAMERA:\n– POV-style, slightly above product level\n– Very subtle handheld movement\n– No zoom (or very slow natural zoom toward product)\n\nFINAL RESULT:\nA hyper-realistic POV unboxing video that looks exactly like a real person authentically opening and reacting to a product for the first time, identical in feel to organic TikTok or Instagram Reels unboxing content."
+    },
+    {
+      "id": 17,
+      "title": "Unboxing — Reação ao Produto",
+      "category": "unboxing",
+      "tags": [
+        "Flow",
+        "Kling"
+      ],
+      "description": "Foco na reação emocional autêntica ao receber/ver o produto pela primeira vez.",
+      "body": "Animate this image as a hyper-realistic product reaction video focused on authentic emotional response.\n\nREACTION ANIMATION:\n– The subject is shown after opening/receiving a product\n– She holds the product visibly in her hands\n– She examines it with genuine interest and detail\n– She turns it, looks at it from different angles\n– Natural handling behavior throughout\n– She shows the product face-forward toward the camera\n\nAUTHENTIC EMOTIONAL JOURNEY:\nPhase 1 — First Look:\n– Eyes widen slightly / Lips part naturally\n– Slight inhale visible in chest\n– Genuine surprised/pleased expression\n\nPhase 2 — Examination:\n– Focused, curious expression while inspecting details\n– Head tilts naturally as she looks at different parts\n– Subtle nods of approval / Natural smile grows gradually\n\nPhase 3 — Show & Recommend:\n– Turns product to camera\n– Warm, confident, satisfied expression\n– Brief smile while displaying product\n– Natural eye contact with camera\n\nHANDS & PRODUCT:\n– Realistic hand movements during examination\n– Product handled with appropriate weight physics\n– Fingers trace product details naturally\n– Natural grip adjustments\n\nFINAL RESULT:\nAn authentic, emotionally compelling product reaction animation that captures genuine human response to receiving a product, perfect for influencer testimonial content."
+    },
+    {
+      "id": 18,
+      "title": "Animação Elasticidade — Tecido e Detalhe",
+      "category": "animacao",
+      "tags": [
+        "Flow",
+        "Freepik"
+      ],
+      "description": "Animação com foco em demonstrar a elasticidade e textura do tecido da peça.",
+      "body": "Animate this image focusing on fabric elasticity and clothing texture demonstration.\n\nFABRIC ELASTICITY DEMONSTRATION:\n– The subject gently stretches a clothing element (waistband, sleeve, fabric panel)\n– Fabric stretches realistically showing material properties\n– Natural elastic return when released\n– Realistic fabric memory and recovery behavior\n– Skin visible through stretch if fabric is thin\n\nTEXTURE SHOWCASE:\n– Slight touch and feel gesture on clothing surface\n– Natural fabric movement shows texture\n– Light reflects realistically off fabric surface\n– Woven or knit patterns visible in motion\n\nHAND AND FINGER PHYSICS:\n– Realistic grip with fabric compression\n– Natural finger indentations in fabric\n– Smooth controlled stretch motion\n– Natural release and return\n\nBODY SUPPORT MOVEMENT:\n– Subtle natural body sway\n– Hip and shoulder movement\n– Natural posture shifts\n\nREALISM REQUIREMENTS:\n– Preserve all fabric properties from original image\n– No CGI fabric look\n– No uniform plastic-like material\n– Realistic textile behavior throughout\n\nFINAL RESULT:\nA video that clearly and naturally demonstrates the fabric quality, elasticity and texture of the clothing, indistinguishable from a real product demonstration video."
+    }
+  ]
+};
+
+</script>
+<style>
+:root{
+  --bg:#06040f;--surface:#110e20;--card:#150f25;--card2:#1a1330;
+  --border:#2a1f4a;--glow1:#7c3aed;--glow2:#a855f7;
+  --accent:#b06eff;--accent2:#d4a8ff;
+  --text:#f0ecff;--muted:#8070a8;--muted2:#5a4878;
+  --green:#059669;--red:#dc2626;--yellow:#d97706;
+  --font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.3;}
+.blob{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;}
+.blob-1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.15),transparent 70%);top:-200px;left:-200px;}
+.blob-2{width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,.1),transparent 70%);bottom:0;right:-100px;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:100;padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,4,15,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(124,58,237,.2);box-shadow:0 1px 0 rgba(176,110,255,.06),0 4px 24px rgba(0,0,0,.4);}
+.logo{font-family:var(--font);font-weight:900;font-size:17px;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(135deg,#b06eff,#e0b3ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:10px;}
+.logo-icon{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#7c3aed,#a855f7);display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 0 12px rgba(124,58,237,.5);}
+.header-nav{display:flex;align-items:center;gap:10px;}
+.nav-btn{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:8px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:#b06eff;font-family:var(--font);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;}
+.nav-btn:hover{background:rgba(124,58,237,.2);}
+.nav-btn.danger{border-color:rgba(220,38,38,.3);color:#f87171;background:rgba(220,38,38,.05);}
+.nav-btn.danger:hover{background:rgba(220,38,38,.12);}
+.save-btn{display:flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;font-family:var(--font);font-weight:600;font-size:13px;cursor:pointer;transition:all .18s;box-shadow:0 0 14px rgba(124,58,237,.35);}
+.save-btn:hover{box-shadow:0 0 22px rgba(124,58,237,.55);transform:translateY(-1px);}
+.save-btn.ok{background:linear-gradient(135deg,#065f46,#059669);}
+.user-badge{font-size:12px;color:#8070a8;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);padding:5px 12px;border-radius:8px;font-family:var(--font);}
+
+/* PAGE */
+.page{max-width:1100px;margin:0 auto;padding:32px;position:relative;z-index:1;display:grid;grid-template-columns:260px 1fr;gap:24px;align-items:start;}
+@media(max-width:860px){.page{grid-template-columns:1fr;padding:18px;}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:78px;display:flex;flex-direction:column;gap:14px;}
+.panel{background:var(--card);border-radius:14px;border:1px solid rgba(124,58,237,.2);overflow:hidden;}
+.panel-head{padding:14px 16px;border-bottom:1px solid rgba(124,58,237,.15);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);background:rgba(124,58,237,.06);}
+.panel-body{padding:12px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.s-stat{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);border-radius:10px;padding:12px;text-align:center;}
+.s-num{font-size:24px;font-weight:900;background:linear-gradient(135deg,#d4a8ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:3px;}
+.s-label{font-size:11px;color:var(--muted);}
+.cat-list{display:flex;flex-direction:column;gap:4px;}
+.cat-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;transition:all .15s;}
+.cat-row:hover{background:rgba(124,58,237,.08);}
+.cat-row.active{background:rgba(124,58,237,.18);border-left:2px solid #a855f7;}
+.cat-row-click{display:flex;align-items:center;gap:8px;flex:1;cursor:pointer;}
+.cat-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0;}
+.cat-label{font-size:13.5px;flex:1;}
+.cat-count{font-size:11px;color:var(--muted);background:rgba(124,58,237,.12);padding:2px 7px;border-radius:999px;}
+.cat-del{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;flex-shrink:0;transition:all .15s;}
+.cat-del.free{border:1px solid rgba(220,38,38,.25);background:rgba(220,38,38,.06);color:#f87171;}
+.cat-del.free:hover{background:rgba(220,38,38,.18);}
+.cat-del.locked{border:1px solid rgba(217,119,6,.25);background:rgba(217,119,6,.06);color:#fbbf24;cursor:not-allowed;}
+.add-btn{width:100%;padding:11px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;font-family:var(--font);font-weight:600;font-size:13.5px;cursor:pointer;transition:all .18s;box-shadow:0 0 14px rgba(124,58,237,.3);display:flex;align-items:center;justify-content:center;gap:7px;}
+.add-btn:hover{box-shadow:0 0 22px rgba(124,58,237,.5);transform:translateY(-1px);}
+.add-btn.secondary{background:linear-gradient(135deg,#1e1a3c,#3b1f6e);box-shadow:0 0 10px rgba(124,58,237,.15);}
+.action-row{display:flex;gap:8px;}
+.action-btn{flex:1;padding:9px 10px;border-radius:9px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);color:var(--accent2);font-family:var(--font);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;text-align:center;}
+.action-btn:hover{background:rgba(124,58,237,.18);}
+
+/* CONTENT */
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.sh-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(168,85,247,.15));border:1px solid rgba(124,58,237,.3);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 10px rgba(124,58,237,.18);}
+.sh-title{font-size:20px;font-weight:700;background:linear-gradient(90deg,var(--text),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sh-count{margin-left:auto;font-size:11px;color:var(--muted);background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.2);padding:3px 10px;border-radius:999px;}
+.prompt-row{display:flex;align-items:stretch;border-radius:14px;margin-bottom:10px;background:linear-gradient(135deg,rgba(124,58,237,.35),rgba(168,85,247,.12),rgba(124,58,237,.06));padding:1px;transition:filter .2s;}
+.prompt-row:hover{filter:brightness(1.05);}
+.prompt-row-inner{background:var(--card);border-radius:13px;display:flex;align-items:stretch;width:100%;overflow:hidden;}
+.row-grip{width:6px;flex-shrink:0;background:linear-gradient(180deg,rgba(124,58,237,.4),rgba(168,85,247,.2));border-radius:13px 0 0 13px;cursor:grab;}
+.row-main{flex:1;padding:14px 16px;min-width:0;}
+.row-title{font-size:14.5px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+.row-id{font-family:var(--mono);font-size:10px;color:#b06eff;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);padding:2px 7px;border-radius:5px;}
+.row-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.row-cat{font-size:11px;color:var(--muted);background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);padding:2px 8px;border-radius:5px;}
+.row-tags{display:flex;gap:5px;}
+.tag-sm{font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px;}
+.tag-sm.chatgpt{border:1px solid rgba(16,163,127,.4);color:#10a37f;background:rgba(16,163,127,.07);}
+.tag-sm.gemini{border:1px solid rgba(66,133,244,.4);color:#5b9cf6;background:rgba(66,133,244,.07);}
+.tag-sm.freepik{border:1px solid rgba(255,120,0,.3);color:#ff8c38;background:rgba(255,120,0,.07);}
+.tag-sm.grok{border:1px solid rgba(200,180,255,.2);color:#c8b4ff;background:rgba(200,180,255,.05);}
+.tag-sm.flow{border:1px solid rgba(160,80,255,.4);color:#b06eff;background:rgba(160,80,255,.07);}
+.tag-sm.kling{border:1px solid rgba(255,60,120,.3);color:#ff6b9d;background:rgba(255,60,120,.07);}
+.row-actions{display:flex;align-items:center;gap:6px;padding:0 12px;flex-shrink:0;}
+.row-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(124,58,237,.2);background:rgba(124,58,237,.06);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:13px;}
+.row-btn:hover{background:rgba(124,58,237,.18);border-color:rgba(176,110,255,.4);color:var(--accent2);}
+.row-btn.del:hover{background:rgba(220,38,38,.12);border-color:rgba(220,38,38,.4);color:#f87171;}
+.section-empty{text-align:center;padding:32px;color:var(--muted);font-size:13.5px;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(6,4,15,.9);backdrop-filter:blur(16px);z-index:300;align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.modal{width:100%;max-width:780px;max-height:92vh;display:flex;flex-direction:column;border-radius:18px;background:linear-gradient(135deg,rgba(124,58,237,.6),rgba(168,85,247,.3),rgba(124,58,237,.15));padding:1px;box-shadow:0 0 60px rgba(124,58,237,.3);}
+.modal.sm{max-width:480px;}
+.modal-inner{background:var(--card2);border-radius:17px;display:flex;flex-direction:column;overflow:hidden;flex:1;max-height:calc(92vh - 2px);}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid rgba(124,58,237,.2);}
+.modal-title{font-size:17px;font-weight:700;}
+.modal-close{width:30px;height:30px;border-radius:7px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .15s;}
+.modal-close:hover{color:var(--text);}
+.modal-body{padding:22px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:18px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:7px;}
+.form-group.full{grid-column:1/-1;}
+label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);}
+input,select,textarea{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.25);border-radius:10px;padding:11px 14px;color:var(--text);font-family:var(--font);font-size:14px;outline:none;transition:border-color .15s,box-shadow .15s;width:100%;}
+input:focus,select:focus,textarea:focus{border-color:rgba(168,85,247,.6);box-shadow:0 0 12px rgba(124,58,237,.2);}
+select option{background:#1a1330;}
+textarea{font-family:var(--mono);font-size:13px;line-height:1.8;resize:vertical;min-height:260px;}
+.tags-wrap{display:flex;flex-wrap:wrap;gap:8px;}
+.tag-check{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:7px;border:1px solid rgba(124,58,237,.25);background:rgba(124,58,237,.06);cursor:pointer;transition:all .15s;font-size:13px;user-select:none;}
+.tag-check.checked{background:rgba(124,58,237,.2);border-color:rgba(168,85,247,.5);color:var(--accent2);}
+.form-hint{font-size:11px;color:var(--muted);}
+.modal-foot{padding:16px 22px;border-top:1px solid rgba(124,58,237,.2);display:flex;gap:8px;justify-content:flex-end;}
+.btn-primary{padding:10px 22px;border-radius:9px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:all .18s;box-shadow:0 0 14px rgba(124,58,237,.3);}
+.btn-primary:hover{box-shadow:0 0 22px rgba(124,58,237,.5);transform:translateY(-1px);}
+.btn-secondary{padding:10px 18px;border-radius:9px;background:transparent;border:1px solid rgba(124,58,237,.3);color:var(--muted);font-family:var(--font);font-size:14px;cursor:pointer;transition:all .15s;}
+.btn-secondary:hover{border-color:rgba(176,110,255,.5);color:var(--accent2);}
+.json-view{font-family:var(--mono);font-size:11.5px;line-height:1.7;color:#ccc5e8;background:rgba(124,58,237,.04);border:1px solid rgba(124,58,237,.12);border-radius:10px;padding:14px;max-height:300px;overflow:auto;white-space:pre-wrap;}
+.json-view::-webkit-scrollbar{width:4px;}
+.json-view::-webkit-scrollbar-thumb{background:rgba(124,58,237,.4);border-radius:4px;}
+
+/* CONFIRM */
+.confirm-box{background:var(--card2);border:1px solid rgba(220,38,38,.3);border-radius:16px;padding:28px;max-width:380px;width:90%;box-shadow:0 0 40px rgba(220,38,38,.15);}
+.confirm-icon{font-size:36px;text-align:center;margin-bottom:14px;}
+.confirm-title{font-size:17px;font-weight:700;text-align:center;margin-bottom:8px;color:#fca5a5;}
+.confirm-msg{font-size:13.5px;color:var(--muted);text-align:center;margin-bottom:22px;}
+.confirm-btns{display:flex;gap:10px;}
+.confirm-btns button{flex:1;padding:10px;border-radius:9px;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:all .15s;}
+.btn-cancel{background:transparent;border:1px solid rgba(124,58,237,.3);color:var(--muted);}
+.btn-cancel:hover{border-color:rgba(176,110,255,.5);color:var(--accent2);}
+.btn-del{background:linear-gradient(135deg,#7f1d1d,#dc2626);border:none;color:#fff;box-shadow:0 0 14px rgba(220,38,38,.3);}
+.btn-del:hover{box-shadow:0 0 22px rgba(220,38,38,.5);}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;z-index:400;padding:13px 20px;border-radius:11px;font-size:13.5px;font-weight:500;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;max-width:340px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{background:linear-gradient(135deg,#065f46,#059669);color:#fff;box-shadow:0 0 20px rgba(5,150,105,.3);}
+.toast.error{background:linear-gradient(135deg,#7f1d1d,#dc2626);color:#fff;box-shadow:0 0 20px rgba(220,38,38,.3);}
+.toast.info{background:linear-gradient(135deg,#1e1a3c,#7c3aed);color:#fff;box-shadow:0 0 20px rgba(124,58,237,.3);}
+.toast.warning{background:linear-gradient(135deg,#78350f,#d97706);color:#fff;box-shadow:0 0 20px rgba(217,119,6,.3);}
+
+footer{position:relative;z-index:1;border-top:1px solid rgba(124,58,237,.12);padding:22px 32px;text-align:center;color:var(--muted2);font-size:12px;}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<header>
+  <div class="logo"><div class="logo-icon">⚙</div> MVZ Admin</div>
+  <div class="header-nav">
+    <span class="user-badge" id="user-badge"></span>
+    <button class="nav-btn" id="btn-goto-index">← Ver Site</button>
+    <button class="save-btn" id="save-btn">💾 Exportar JSON</button>
+    <button class="nav-btn danger" id="btn-logout">⏻ Sair</button>
+  </div>
+</header>
+
+<div class="page">
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="panel-head">📊 Estatísticas</div>
+      <div class="panel-body">
+        <div class="stat-grid">
+          <div class="s-stat"><div class="s-num" id="s-total">0</div><div class="s-label">Prompts</div></div>
+          <div class="s-stat"><div class="s-num" id="s-cats">0</div><div class="s-label">Categorias</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">🏷 Categorias</div>
+      <div class="panel-body">
+        <div class="cat-list" id="cat-list"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">✦ Ações</div>
+      <div class="panel-body" style="display:flex;flex-direction:column;gap:8px;">
+        <button class="add-btn" id="btn-new-prompt">＋ Novo Prompt</button>
+        <button class="add-btn secondary" id="btn-new-cat">🏷 Nova Categoria</button>
+        <div class="action-row">
+          <button class="action-btn" id="btn-export">⬇ Baixar JSON</button>
+          <button class="action-btn" id="btn-import">⬆ Importar JSON</button>
+        </div>
+        <button class="action-btn" id="btn-view-json">&#123; &#125; Ver JSON</button>
+        <input type="file" id="import-file" accept=".json" style="display:none">
+      </div>
+    </div>
+  </aside>
+
+  <main id="content-area">
+    <div style="text-align:center;padding:60px 20px;color:var(--muted);">
+      <div style="font-size:32px;margin-bottom:12px;">🔮</div>
+      <p>Carregando prompts…</p>
+    </div>
+  </main>
+</div>
+
+<!-- PROMPT FORM -->
+<div class="overlay" id="overlay-prompt">
+  <div class="modal">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div class="modal-title" id="prompt-form-title">Novo Prompt</div>
+        <button class="modal-close" id="btn-close-prompt">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Título *</label>
+            <input type="text" id="f-title" placeholder="Ex: Gancho Jogar Roupa 3">
+          </div>
+          <div class="form-group">
+            <label>Categoria *</label>
+            <select id="f-category"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Descrição curta</label>
+          <input type="text" id="f-desc" placeholder="Breve resumo do prompt…">
+        </div>
+        <div class="form-group">
+          <label>Ferramentas / Tags</label>
+          <div class="tags-wrap" id="tags-wrap">
+            <div class="tag-check" data-tag="Flow">Flow</div>
+            <div class="tag-check" data-tag="Freepik">Freepik</div>
+            <div class="tag-check" data-tag="Grok">Grok</div>
+            <div class="tag-check" data-tag="Kling">Kling</div>
+            <div class="tag-check" data-tag="ChatGPT">ChatGPT</div>
+            <div class="tag-check" data-tag="Gemini">Gemini</div>
+          </div>
+          <span class="form-hint">Clique para selecionar as ferramentas</span>
+        </div>
+        <div class="form-group full">
+          <label>Corpo do Prompt *</label>
+          <textarea id="f-body" placeholder="Cole ou digite o prompt completo aqui…"></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-secondary" id="btn-cancel-prompt">Cancelar</button>
+        <button class="btn-primary" id="btn-save-prompt">💾 Salvar Prompt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY FORM -->
+<div class="overlay" id="overlay-cat">
+  <div class="modal sm">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div class="modal-title" id="cat-form-title">Nova Categoria</div>
+        <button class="modal-close" id="btn-close-cat">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Ícone (emoji) *</label>
+          <input type="text" id="c-icon" placeholder="Ex: 🎯" maxlength="4" style="font-size:22px;text-align:center;">
+          <span class="form-hint">Cole um emoji que represente a categoria</span>
+        </div>
+        <div class="form-group">
+          <label>Nome da Categoria *</label>
+          <input type="text" id="c-label" placeholder="Ex: Reels, Produto, Lifestyle…">
+        </div>
+        <div class="form-group">
+          <label>ID único *</label>
+          <input type="text" id="c-id" placeholder="Ex: reels (sem espaço, sem acento)">
+          <span class="form-hint">Letras minúsculas e hífen apenas</span>
+        </div>
+        <div class="form-group">
+          <label>Descrição</label>
+          <input type="text" id="c-desc" placeholder="Breve descrição da categoria…">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-secondary" id="btn-cancel-cat">Cancelar</button>
+        <button class="btn-primary" id="btn-save-cat">💾 Salvar Categoria</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JSON VIEWER -->
+<div class="overlay" id="overlay-json">
+  <div class="modal">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div class="modal-title">&#123; &#125; JSON Atual</div>
+        <button class="modal-close" id="btn-close-json">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="json-view" id="json-view"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-secondary" id="btn-close-json2">Fechar</button>
+        <button class="btn-primary" id="btn-copy-json">📋 Copiar JSON</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="overlay" id="overlay-confirm">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑</div>
+    <div class="confirm-title">Confirmar exclusão</div>
+    <div class="confirm-msg" id="confirm-msg">Esta ação não pode ser desfeita.</div>
+    <div class="confirm-btns">
+      <button class="btn-cancel" id="btn-cancel-confirm">Cancelar</button>
+      <button class="btn-del" id="btn-ok-confirm">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<footer>MVZ Admin — Gerenciador de Prompts · Dados salvos localmente</footer>
+
+<script>
+// ── Proteção de rota ──
+if (sessionStorage.getItem('mvz-auth') !== 'ok') {
+  window.location.href = 'login.html';
+}
+
+// ── Estado ──
+let data = { meta:{}, categories:[], prompts:[] };
+let filterCat    = 'all';
+let editingId    = null;
+let editingCatId = null;
+let pendingDelete = null; // { type:'prompt'|'cat', id }
+
+// ── Utilitários ──
+const $ = id => document.getElementById(id);
+function tagClass(t){
+  return {ChatGPT:'chatgpt',Gemini:'gemini',Freepik:'freepik',Grok:'grok',Flow:'flow',Kling:'kling'}[t]||'grok';
+}
+function toast(msg, type='info'){
+  const el=$('toast');
+  el.className='toast '+type;
+  el.textContent=msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),3200);
+}
+
+// ── Carregar dados ──
+function loadData(){
+  const user = sessionStorage.getItem('mvz-user') || 'admin';
+  $('user-badge').textContent = '👤 ' + user;
+  try {
+    data = JSON.parse(JSON.stringify(PROMPTS_DATA));
+    const saved = localStorage.getItem('mvz-prompts');
+    if (saved) {
+      const local = JSON.parse(saved);
+      if (local && local.prompts && local.prompts.length >= data.prompts.length) data = local;
+    }
+  } catch(e) { toast('Erro ao carregar dados.','error'); return; }
+  render();
+}
+
+function saveLocal(){
+  localStorage.setItem('mvz-prompts', JSON.stringify(data));
+}
+
+// ── Render ──
+function render(){
+  $('s-total').textContent = data.prompts.length;
+  $('s-cats').textContent  = data.categories.length;
+  renderCatList();
+  renderContent();
+  populateCatSelect();
+}
+
+function renderCatList(){
+  const list = $('cat-list');
+  list.innerHTML = '';
+
+  // Todos
+  const all = document.createElement('div');
+  all.className = 'cat-row' + (filterCat==='all' ? ' active' : '');
+  all.innerHTML = '<div class="cat-row-click"><span class="cat-icon">✦</span><span class="cat-label">Todos</span></div><span class="cat-count">' + data.prompts.length + '</span>';
+  all.querySelector('.cat-row-click').addEventListener('click', ()=>{ filterCat='all'; render(); });
+  list.appendChild(all);
+
+  data.categories.forEach(function(c){
+    const count = data.prompts.filter(p=>p.category===c.id).length;
+    const inUse = count > 0;
+
+    const row = document.createElement('div');
+    row.className = 'cat-row' + (filterCat===c.id ? ' active' : '');
+
+    const click = document.createElement('div');
+    click.className = 'cat-row-click';
+    click.innerHTML = '<span class="cat-icon">' + c.icon + '</span><span class="cat-label">' + c.label + '</span>';
+    click.addEventListener('click', (function(catId){
+      return function(){ filterCat=catId; render(); };
+    })(c.id));
+
+    const cnt = document.createElement('span');
+    cnt.className = 'cat-count';
+    cnt.textContent = count;
+
+    const del = document.createElement('button');
+    del.className = 'cat-del ' + (inUse ? 'locked' : 'free');
+    del.title = inUse ? 'Categoria em uso — remova os prompts antes' : 'Excluir categoria';
+    del.textContent = inUse ? '🔒' : '🗑';
+    if (inUse) {
+      del.addEventListener('click', (function(label, n){
+        return function(e){ e.stopPropagation(); toast('🔒 "' + label + '" está em uso em ' + n + ' prompt' + (n>1?'s':'') + ' — remova-os antes de excluir.', 'warning'); };
+      })(c.label, count));
+    } else {
+      del.addEventListener('click', (function(catId, label){
+        return function(e){
+          e.stopPropagation();
+          openConfirm('A categoria "' + label + '" será removida.', {type:'cat', id:catId});
+        };
+      })(c.id, c.label));
+    }
+
+    row.appendChild(click);
+    row.appendChild(cnt);
+    row.appendChild(del);
+    list.appendChild(row);
+  });
+}
+
+function renderContent(){
+  const area = $('content-area');
+  area.innerHTML = '';
+  const cats = filterCat==='all' ? data.categories : data.categories.filter(c=>c.id===filterCat);
+
+  cats.forEach(function(cat){
+    const prompts = data.prompts.filter(p=>p.category===cat.id);
+    const sec = document.createElement('div');
+    sec.style.marginBottom = '40px';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'section-header';
+    hdr.innerHTML = '<div class="sh-icon">' + cat.icon + '</div><div class="sh-title">' + cat.label + '</div><span class="sh-count">' + prompts.length + '</span>';
+    sec.appendChild(hdr);
+
+    if (!prompts.length) {
+      const em = document.createElement('div');
+      em.className = 'section-empty';
+      em.textContent = 'Nenhum prompt nesta categoria.';
+      sec.appendChild(em);
+    } else {
+      prompts.forEach(function(p){ sec.appendChild(makeRow(p)); });
+    }
+
+    const div = document.createElement('div');
+    div.style.cssText = 'height:1px;margin:32px 0;background:linear-gradient(to right,transparent,rgba(124,58,237,.25),transparent)';
+    sec.appendChild(div);
+    area.appendChild(sec);
+  });
+}
+
+function makeRow(p){
+  const wrap = document.createElement('div');
+  wrap.className = 'prompt-row';
+
+  const tags = (p.tags||[]).map(t=>'<span class="tag-sm ' + tagClass(t) + '">' + t + '</span>').join('');
+  const cat  = data.categories.find(c=>c.id===p.category);
+  const catLabel = cat ? cat.icon + ' ' + cat.label : p.category;
+
+  wrap.innerHTML =
+    '<div class="prompt-row-inner">' +
+      '<div class="row-grip"></div>' +
+      '<div class="row-main">' +
+        '<div class="row-title"><span class="row-id">#' + p.id + '</span>' + p.title + '</div>' +
+        '<div class="row-meta"><span class="row-cat">' + catLabel + '</span><div class="row-tags">' + tags + '</div></div>' +
+      '</div>' +
+      '<div class="row-actions">' +
+        '<button class="row-btn" data-action="edit" data-id="' + p.id + '" title="Editar">✏️</button>' +
+        '<button class="row-btn" data-action="dup"  data-id="' + p.id + '" title="Duplicar">⧉</button>' +
+        '<button class="row-btn del" data-action="del" data-id="' + p.id + '" title="Excluir">🗑</button>' +
+      '</div>' +
+    '</div>';
+
+  wrap.querySelectorAll('[data-action]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const id = parseInt(this.dataset.id);
+      if (this.dataset.action==='edit') editPrompt(id);
+      if (this.dataset.action==='dup')  dupPrompt(id);
+      if (this.dataset.action==='del')  {
+        const pr = data.prompts.find(x=>x.id===id);
+        openConfirm('"' + pr.title + '" será removido permanentemente.', {type:'prompt', id:id});
+      }
+    });
+  });
+
+  return wrap;
+}
+
+// ── Populate select ──
+function populateCatSelect(){
+  const sel = $('f-category');
+  const cur = sel.value;
+  sel.innerHTML = data.categories.map(c=>'<option value="' + c.id + '">' + c.icon + ' ' + c.label + '</option>').join('');
+  if (cur) sel.value = cur;
+}
+
+// ── Prompt form ──
+function openPromptForm(preset){
+  editingId = preset ? preset.id : null;
+  $('prompt-form-title').textContent = preset ? 'Editar Prompt' : 'Novo Prompt';
+  $('f-title').value    = preset ? preset.title : '';
+  $('f-desc').value     = preset ? (preset.description||'') : '';
+  $('f-body').value     = preset ? preset.body : '';
+  populateCatSelect();
+  if (preset) $('f-category').value = preset.category;
+
+  document.querySelectorAll('.tag-check').forEach(function(tc){
+    const on = preset ? (preset.tags||[]).includes(tc.dataset.tag) : false;
+    tc.classList.toggle('checked', on);
+  });
+
+  $('overlay-prompt').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=>$('f-title').focus(), 100);
+}
+
+function closePromptForm(){
+  $('overlay-prompt').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function savePrompt(){
+  const title    = $('f-title').value.trim();
+  const desc     = $('f-desc').value.trim();
+  const body     = $('f-body').value.trim();
+  const category = $('f-category').value;
+  const tags     = [...document.querySelectorAll('.tag-check.checked')].map(tc=>tc.dataset.tag);
+
+  if (!title) { toast('O título é obrigatório.','error'); return; }
+  if (!body)  { toast('O corpo do prompt é obrigatório.','error'); return; }
+
+  if (editingId !== null) {
+    const idx = data.prompts.findIndex(p=>p.id===editingId);
+    if (idx > -1) data.prompts[idx] = Object.assign({}, data.prompts[idx], {title, description:desc, body, category, tags});
+    toast('✅ Prompt atualizado!','success');
+  } else {
+    const newId = data.prompts.length ? Math.max.apply(null, data.prompts.map(p=>p.id)) + 1 : 1;
+    data.prompts.push({id:newId, title, category, tags, description:desc, body});
+    toast('✅ Prompt criado!','success');
+  }
+
+  saveLocal();
+  closePromptForm();
+  render();
+}
+
+function editPrompt(id){
+  const p = data.prompts.find(p=>p.id===id);
+  if (p) openPromptForm(p);
+}
+
+function dupPrompt(id){
+  const p = data.prompts.find(p=>p.id===id);
+  if (!p) return;
+  const newId = Math.max.apply(null, data.prompts.map(p=>p.id)) + 1;
+  data.prompts.push(Object.assign({}, p, {id:newId, title:p.title+' (cópia)'}));
+  saveLocal(); render();
+  toast('⧉ Prompt duplicado!','info');
+}
+
+// ── Category form ──
+function openCatForm(){
+  editingCatId = null;
+  $('cat-form-title').textContent = 'Nova Categoria';
+  $('c-icon').value  = '';
+  $('c-label').value = '';
+  $('c-id').value    = '';
+  $('c-id').disabled = false;
+  $('c-desc').value  = '';
+  $('overlay-cat').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=>$('c-icon').focus(), 100);
+}
+
+function closeCatForm(){
+  $('overlay-cat').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function saveCat(){
+  const icon  = $('c-icon').value.trim();
+  const label = $('c-label').value.trim();
+  const id    = $('c-id').value.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const desc  = $('c-desc').value.trim();
+
+  if (!icon)  { toast('Adicione um emoji.','error'); return; }
+  if (!label) { toast('O nome é obrigatório.','error'); return; }
+  if (!id)    { toast('O ID é obrigatório.','error'); return; }
+
+  if (data.categories.find(c=>c.id===id)) {
+    toast('Já existe uma categoria com esse ID.','error'); return;
+  }
+
+  data.categories.push({id, label, icon, description:desc});
+  saveLocal(); closeCatForm(); render();
+  toast('🏷 Categoria "' + label + '" criada!','success');
+}
+
+// ── Confirm ──
+function openConfirm(msg, pending){
+  $('confirm-msg').textContent = msg;
+  pendingDelete = pending;
+  $('overlay-confirm').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeConfirm(){
+  $('overlay-confirm').classList.remove('open');
+  document.body.style.overflow = '';
+  pendingDelete = null;
+}
+
+function doDelete(){
+  if (!pendingDelete) return;
+  if (pendingDelete.type === 'prompt') {
+    data.prompts = data.prompts.filter(p=>p.id!==pendingDelete.id);
+    toast('🗑 Prompt excluído.','info');
+  } else {
+    data.categories = data.categories.filter(c=>c.id!==pendingDelete.id);
+    toast('🗑 Categoria excluída.','info');
+  }
+  saveLocal(); closeConfirm(); render();
+}
+
+// ── Export / Import ──
+function exportJSON(){
+  const str  = JSON.stringify(data, null, 2);
+  const blob = new Blob([str], {type:'application/json'});
+  const a    = document.createElement('a');
+  a.href     = URL.createObjectURL(blob);
+  a.download = 'prompts.json';
+  a.click();
+  toast('⬇ JSON exportado!','success');
+}
+
+function importJSON(e){
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    try {
+      const imported = JSON.parse(ev.target.result);
+      if (!imported.prompts) throw new Error('Formato inválido');
+      data = imported;
+      saveLocal(); render();
+      toast('⬆ JSON importado!','success');
+    } catch(err) { toast('Erro: ' + err.message,'error'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+// ── JSON viewer ──
+function openJSONView(){
+  $('json-view').textContent = JSON.stringify(data, null, 2);
+  $('overlay-json').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeJSONView(){
+  $('overlay-json').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── Navegar para o index com sync ──
+function goToIndex(){
+  sessionStorage.setItem('mvz-live-data', JSON.stringify(data));
+  window.location.href = 'index.html';
+}
+
+function doLogout(){
+  sessionStorage.removeItem('mvz-auth');
+  sessionStorage.removeItem('mvz-user');
+  window.location.href = 'login.html';
+}
+
+// ── Bindings (ZERO onclick inline) ──
+document.addEventListener('DOMContentLoaded', function(){
+  // header
+  $('btn-goto-index').addEventListener('click', goToIndex);
+  $('save-btn').addEventListener('click', function(){
+    exportJSON();
+    this.innerHTML = '✅ Exportado!';
+    this.classList.add('ok');
+    setTimeout(()=>{ this.innerHTML='💾 Exportar JSON'; this.classList.remove('ok'); }, 2500);
+  });
+  $('btn-logout').addEventListener('click', doLogout);
+
+  // sidebar ações
+  $('btn-new-prompt').addEventListener('click', ()=>openPromptForm(null));
+  $('btn-new-cat').addEventListener('click', openCatForm);
+  $('btn-export').addEventListener('click', exportJSON);
+  $('btn-import').addEventListener('click', ()=>$('import-file').click());
+  $('import-file').addEventListener('change', importJSON);
+  $('btn-view-json').addEventListener('click', openJSONView);
+
+  // prompt form
+  $('btn-close-prompt').addEventListener('click', closePromptForm);
+  $('btn-cancel-prompt').addEventListener('click', closePromptForm);
+  $('btn-save-prompt').addEventListener('click', savePrompt);
+  $('overlay-prompt').addEventListener('click', function(e){ if(e.target===this) closePromptForm(); });
+
+  // tag checks
+  document.querySelectorAll('.tag-check').forEach(function(tc){
+    tc.addEventListener('click', function(){ this.classList.toggle('checked'); });
+  });
+
+  // cat form
+  $('btn-close-cat').addEventListener('click', closeCatForm);
+  $('btn-cancel-cat').addEventListener('click', closeCatForm);
+  $('btn-save-cat').addEventListener('click', saveCat);
+  $('overlay-cat').addEventListener('click', function(e){ if(e.target===this) closeCatForm(); });
+
+  // json viewer
+  $('btn-close-json').addEventListener('click', closeJSONView);
+  $('btn-close-json2').addEventListener('click', closeJSONView);
+  $('btn-copy-json').addEventListener('click', function(){
+    navigator.clipboard.writeText(JSON.stringify(data,null,2)).then(()=>toast('JSON copiado!','success'));
+  });
+  $('overlay-json').addEventListener('click', function(e){ if(e.target===this) closeJSONView(); });
+
+  // confirm
+  $('btn-cancel-confirm').addEventListener('click', closeConfirm);
+  $('btn-ok-confirm').addEventListener('click', doDelete);
+  $('overlay-confirm').addEventListener('click', function(e){ if(e.target===this) closeConfirm(); });
+
+  // ESC
+  document.addEventListener('keydown', function(e){
+    if (e.key==='Escape') {
+      closePromptForm(); closeCatForm(); closeJSONView(); closeConfirm();
+    }
+  });
+
+  loadData();
+});
+</script>
+</body>
+</html>
