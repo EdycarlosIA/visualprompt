@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MVZ Prompts — Biblioteca IA</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Visual Prompts — Biblioteca IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:        #06040f;
@@ -438,11 +440,304 @@ footer{
   .stat{max-width:calc(50% - 6px);}
   .p-tools,.p-desc-short{display:none;}
 }
+
+
+/* ─────────────────────────────────────────────
+   VISUAL MODERN UI — ajustes solicitados
+   - Nome Visual substituído por Visual
+   - Tipografia mais moderna: Inter + Space Grotesk
+   - Layout com cards mais limpos, glassmorphism e melhor hierarquia
+   ───────────────────────────────────────────── */
+:root{
+  --bg:#070812;
+  --bg2:#0d1020;
+  --surface:#12152a;
+  --card:#161a31;
+  --card2:#1b203a;
+  --border:rgba(255,255,255,.11);
+  --glow1:#8b5cf6;
+  --glow2:#22d3ee;
+  --glow3:#f472b6;
+  --accent:#8b5cf6;
+  --accent2:#22d3ee;
+  --text:#f8fafc;
+  --muted:#aab3cc;
+  --muted2:#68708a;
+  --font:'Inter',Arial,sans-serif;
+  --display:'Space Grotesk','Inter',Arial,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+body{
+  min-height:100vh;
+  font-family:var(--font);
+  font-size:15.5px;
+  background:
+    radial-gradient(circle at 15% -10%,rgba(139,92,246,.28),transparent 34%),
+    radial-gradient(circle at 85% 0%,rgba(34,211,238,.16),transparent 28%),
+    radial-gradient(circle at 50% 120%,rgba(244,114,182,.10),transparent 36%),
+    linear-gradient(180deg,var(--bg),var(--bg2));
+}
+body::before{
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-size:56px 56px,56px 56px,auto;
+  opacity:.65;
+}
+header{
+  height:72px;
+  background:rgba(7,8,18,.72);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(22px) saturate(1.25);
+  box-shadow:0 10px 36px rgba(0,0,0,.28);
+}
+.logo{
+  font-family:var(--display);
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:none;
+  color:var(--text);
+  background:none;
+  -webkit-text-fill-color:initial;
+}
+.logo-icon{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 12px 34px rgba(139,92,246,.35),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.admin-btn{
+  border-radius:999px;
+  padding:9px 16px;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-weight:700;
+}
+.admin-btn:hover{
+  background:rgba(139,92,246,.16);
+  border-color:rgba(34,211,238,.42);
+  box-shadow:0 0 0 4px rgba(34,211,238,.08);
+  transform:translateY(-1px);
+}
+.hero{
+  max-width:1120px;
+  padding-top:92px;
+  padding-bottom:52px;
+}
+.hero-eyebrow{
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--border);
+  color:#dbeafe;
+  padding:7px 16px;
+  font-weight:800;
+}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(42px,6vw,76px);
+  font-weight:700;
+  letter-spacing:-.045em;
+  line-height:.98;
+}
+.hero h1 .line1{
+  color:var(--text);
+  background:none;
+  -webkit-text-fill-color:initial;
+}
+.hero h1 .line2{
+  background:linear-gradient(135deg,var(--accent2) 0%,#a78bfa 42%,#f472b6 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero p{
+  max-width:620px;
+  font-size:18px;
+  font-weight:400;
+  color:var(--muted);
+}
+.stats{
+  max-width:1120px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.stat{
+  max-width:none;
+  text-align:left;
+  border-radius:20px;
+  padding:22px 18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+  border:1px solid var(--border);
+  box-shadow:0 12px 44px rgba(0,0,0,.18);
+}
+.stat:hover{
+  border-color:rgba(34,211,238,.42);
+  transform:translateY(-3px);
+  box-shadow:0 22px 70px rgba(0,0,0,.26);
+}
+.stat-num{
+  font-family:var(--display);
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.search-wrap,.cat-wrap,.main{max-width:1120px;}
+.search-outer{
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(34,211,238,.58),rgba(139,92,246,.42),rgba(244,114,182,.24));
+  box-shadow:0 18px 60px rgba(0,0,0,.23);
+}
+.search-inner{
+  border-radius:17px;
+  padding:16px 22px;
+  background:rgba(22,26,49,.92);
+}
+.search-icon{color:var(--accent2);}
+.search-inner input{
+  font-family:var(--font);
+  font-size:15.5px;
+  font-weight:600;
+}
+.cat-btn{
+  padding:9px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  font-weight:700;
+}
+.cat-btn:hover{
+  border-color:rgba(34,211,238,.42);
+  color:var(--text);
+  background:rgba(34,211,238,.08);
+  transform:translateY(-1px);
+}
+.cat-btn.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 14px 34px rgba(139,92,246,.28);
+}
+.sec-header{
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:rgba(255,255,255,.035);
+}
+.sec-icon{
+  width:44px;
+  height:44px;
+  border-radius:15px;
+  background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(34,211,238,.13));
+  border:1px solid var(--border);
+}
+.sec-title{
+  font-family:var(--display);
+  font-size:20px;
+  color:var(--text);
+  background:none;
+  -webkit-text-fill-color:initial;
+}
+.sec-desc{font-weight:500;}
+.sec-count{
+  color:#e0f2fe;
+  background:rgba(34,211,238,.10);
+  border:1px solid rgba(34,211,238,.22);
+  font-weight:800;
+}
+.prompt-card{
+  border-radius:18px;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(139,92,246,.20),rgba(34,211,238,.08));
+  transition:filter .2s,transform .2s;
+}
+.prompt-card:hover{transform:translateY(-1px);}
+.prompt-card-inner{
+  border-radius:17px;
+  background:rgba(22,26,49,.96);
+  box-shadow:0 14px 42px rgba(0,0,0,.18);
+}
+.prompt-card.open{
+  background:linear-gradient(135deg,rgba(34,211,238,.62),rgba(139,92,246,.54),rgba(244,114,182,.30));
+}
+.p-title{
+  font-family:var(--display);
+  font-size:15.5px;
+  font-weight:600;
+}
+.p-num{
+  color:#cffafe;
+  background:rgba(34,211,238,.10);
+  border:1px solid rgba(34,211,238,.22);
+  border-radius:8px;
+}
+.p-chevron{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--border);
+}
+.prompt-card.open .p-chevron{
+  background:rgba(34,211,238,.10);
+  border-color:rgba(34,211,238,.34);
+  color:var(--accent2);
+}
+.p-text{
+  color:#dbe4ff;
+  background:rgba(7,8,18,.38);
+  border:1px solid var(--border);
+  border-radius:14px;
+  max-height:400px;
+}
+.btn-copy{
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-weight:800;
+}
+.btn-full{
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  font-weight:800;
+}
+.modal{
+  max-width:780px;
+  border-radius:24px;
+  background:linear-gradient(135deg,rgba(34,211,238,.52),rgba(139,92,246,.42),rgba(244,114,182,.20));
+  box-shadow:0 30px 120px rgba(0,0,0,.45);
+}
+.modal-inner{border-radius:23px;}
+.modal-title{
+  font-family:var(--display);
+  font-size:18px;
+}
+footer{
+  border-top:1px solid var(--border);
+  font-weight:600;
+}
+@media(max-width:760px){
+  header,.hero,.stats,.search-wrap,.cat-wrap,.main,footer{padding-left:18px;padding-right:18px;}
+  header{height:66px;}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .hero{padding-top:70px;}
+  .hero h1{font-size:clamp(38px,12vw,56px);}
+  .p-tools,.p-desc-short{display:none;}
+  .sec-header{align-items:flex-start;}
+}
+
 </style>
 <!-- 📦 Dados dos prompts — edite prompts-data.js para atualizar a biblioteca -->
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   MVZ Prompts — Arquivo de dados
+   Visual Prompts — Arquivo de dados
    ✏️  Para adicionar ou editar prompts, altere este arquivo.
    📦  Salve e recarregue o index.html — as mudanças aparecem
        automaticamente na biblioteca.
@@ -450,7 +745,7 @@ footer{
 
 const PROMPTS_DATA = {
   "meta": {
-    "title": "MVZ Prompts",
+    "title": "Visual Prompts",
     "description": "Biblioteca de Prompts para Influencer IA",
     "version": "1.0.0",
     "updated": "2026-06-08"
@@ -466,6 +761,14 @@ const PROMPTS_DATA = {
       "icon": "👤",
       "description": "Criação de rosto e corpo da influencer IA"
     },
+    
+{
+  "id": "tiktokshop",
+  "label": "TikTok Shop",
+  "icon": "🛍️",
+  "description": "Apresentação de roupa para vídeos TikTok Shop"
+},
+
     {
       "id": "animacao",
       "label": "Animação",
@@ -710,7 +1013,263 @@ const PROMPTS_DATA = {
       ],
       "description": "Animação com foco em demonstrar a elasticidade e textura do tecido da peça.",
       "body": "Animate this image focusing on fabric elasticity and clothing texture demonstration.\n\nFABRIC ELASTICITY DEMONSTRATION:\n– The subject gently stretches a clothing element (waistband, sleeve, fabric panel)\n– Fabric stretches realistically showing material properties\n– Natural elastic return when released\n– Realistic fabric memory and recovery behavior\n– Skin visible through stretch if fabric is thin\n\nTEXTURE SHOWCASE:\n– Slight touch and feel gesture on clothing surface\n– Natural fabric movement shows texture\n– Light reflects realistically off fabric surface\n– Woven or knit patterns visible in motion\n\nHAND AND FINGER PHYSICS:\n– Realistic grip with fabric compression\n– Natural finger indentations in fabric\n– Smooth controlled stretch motion\n– Natural release and return\n\nBODY SUPPORT MOVEMENT:\n– Subtle natural body sway\n– Hip and shoulder movement\n– Natural posture shifts\n\nREALISM REQUIREMENTS:\n– Preserve all fabric properties from original image\n– No CGI fabric look\n– No uniform plastic-like material\n– Realistic textile behavior throughout\n\nFINAL RESULT:\nA video that clearly and naturally demonstrates the fabric quality, elasticity and texture of the clothing, indistinguishable from a real product demonstration video."
-    }
+    },
+    {
+"id":19,
+"title":"WAN #01 — Giro com Toque na Cintura",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Giro 3/4 com toque na cintura e olhar de retorno",
+"body":"realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity, natural lighting, clean background, smooth camera motion\n\nshe slowly turns her body three quarters to the side, gently touches the dress at the waist, then looks back at the camera with a calm natural expression while the fabric moves naturally with her motion"
+},
+{
+"id":20,
+"title":"WAN #02 — Transferência de Peso e Rotação",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Transferência de peso e rotação leve dos ombros",
+"body":"realistic adult female model, full body, natural proportions, photorealistic, TikTok Shop fashion video, subtle facial expressions, natural body mechanics, realistic fabric motion, coherent movement, stable identity\n\nshe shifts her weight from one leg to the other, smooths the front of the outfit with both hands, then performs a slight shoulder turn"
+},
+{
+"id":21,
+"title":"WAN #03 — Passo à Frente com Ajuste da Barra",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Passo com ajuste da barra",
+"body":"realistic adult female model, full body, photorealistic\n\nshe takes a small step forward, looks down briefly, adjusts the hem, and returns gaze to camera"
+},
+{
+"id":22,
+"title":"WAN #04 — Virada Lateral com Puxada de Tecido",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Virada lateral mostrando caimento",
+"body":"she turns torso sideways and lightly pulls the fabric to demonstrate fit"
+},
+{
+"id":23,
+"title":"WAN #05 — Caminhada Natural com Parada",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Caminhada com balanço do tecido",
+"body":"she walks slowly while fabric flows, then stops facing camera"
+},
+{
+"id":24,
+"title":"WAN #06 — Cabelo para Trás e Ajuste",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Joga cabelo e ajusta roupa",
+"body":"she brushes her hair back and smooths the waist area"
+},
+{
+"id":25,
+"title":"WAN #07 — Recuo com Postura",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Recuo e correção de postura",
+"body":"she steps back, straightens posture, brushes fabric"
+},
+{
+"id":26,
+"title":"WAN #08 — Soltar Tecido",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Demonstra movimento do tecido",
+"body":"she holds fabric and releases naturally"
+},
+{
+"id":27,
+"title":"WAN #09 — Ajuste de Manga",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Ajuste lateral da roupa",
+"body":"she adjusts sleeve and turns sideways"
+},
+{
+"id":28,
+"title":"WAN #10 — Pivô Lento",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Giro lento mostrando ângulos",
+"body":"she pivots slowly showing outfit angles"
+},
+{
+"id":29,
+"title":"WAN #11 — Balanço Lateral",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Balanço suave do corpo",
+"body":"she sways side to side touching skirt"
+},
+{
+"id":30,
+"title":"WAN #12 — Meia Volta",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Meia volta com pausa",
+"body":"she turns halfway and pauses to show profile"
+},
+{
+"id":31,
+"title":"WAN #13 — Aproximação",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Passo com alisamento da roupa",
+"body":"she steps forward and smooths outfit downward"
+},
+{
+"id":32,
+"title":"WAN #14 — Rotação Corporal Sequencial",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Sequência cabeça → ombro → quadril",
+"body":"she rotates head, shoulders, then hips"
+},
+{
+"id":33,
+"title":"WAN #15 — Levantamento de Tecido",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Mostra formato do vestido",
+"body":"she lifts fabric slightly then releases"
+},
+{
+"id":34,
+"title":"WAN #16 — Mão na Cintura",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Giro do tronco com mão na cintura",
+"body":"she places hand on waist and rotates torso"
+},
+{
+"id":35,
+"title":"WAN #17 — Alisar Lateral",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Ajuste lateral com pose relaxada",
+"body":"she smooths side and shifts to relaxed pose"
+},
+{
+"id":36,
+"title":"WAN #18 — Giro Elegante",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Giro com fluidez do tecido",
+"body":"she performs elegant turn with fabric flow"
+},
+{
+"id":37,
+"title":"WAN #19 — Ajuste de Alça",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Ajuste da roupa com giro leve",
+"body":"she adjusts strap then turns"
+},
+{
+"id":38,
+"title":"WAN #20 — Pivô Confiante",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Giro e postura firme",
+"body":"she pivots slowly and returns confident"
+},
+{
+"id":39,
+"title":"WAN #21 — Mãos na Lateral",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Destaca silhueta",
+"body":"she runs hands along sides highlighting fit"
+},
+{
+"id":40,
+"title":"WAN #22 — Inclinação e Giro",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Mudança de ângulo",
+"body":"she leans forward then rotates torso"
+},
+{
+"id":41,
+"title":"WAN #23 — Ajuste de Dobra",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Remove imperfeição da roupa",
+"body":"she steps and smooths wrinkle"
+},
+{
+"id":42,
+"title":"WAN #24 — Quadril em Destaque",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Postura com foco no caimento",
+"body":"she shifts hip outward and touches waist"
+},
+{
+"id":43,
+"title":"WAN #25 — Giro com Contato",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Rotação com mão no tecido",
+"body":"she rotates tracing fabric"
+},
+{
+"id":44,
+"title":"WAN #26 — Movimento Frente-Trás",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Movimento simples com fluidez",
+"body":"she sways forward and backward"
+},
+{
+"id":45,
+"title":"WAN #27 — Ajuste Frontal",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Alisa tecido completo",
+"body":"she smooths front of outfit"
+},
+{
+"id":46,
+"title":"WAN #28 — Olhar Sobre Ombro",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Olhar lateral com retorno",
+"body":"she looks over shoulder then back"
+},
+{
+"id":47,
+"title":"WAN #29 — Segurar Vestido",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Demonstra caimento",
+"body":"she holds side fabric and rotates"
+},
+{
+"id":48,
+"title":"WAN #30 — Passo e Pose",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Finaliza com postura",
+"body":"she steps, smooths outfit and poses"
+},
+{
+"id":49,
+"title":"WAN #31 — Rotação de Ombros",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Movimento natural de postura",
+"body":"she rotates shoulders and shifts weight"
+},
+{
+"id":50,
+"title":"WAN #32 — Sorriso e Toque",
+"category":"tiktokshop",
+"tags":["Flow"],
+"description":"Destaque de peça com sorriso",
+"body":"she smiles and touches fabric near thigh"
+}
   ]
 };
 
@@ -725,7 +1284,7 @@ const PROMPTS_DATA = {
 <header>
   <div class="logo">
     <div class="logo-icon">✦</div>
-    MVZ Prompts
+    Visual Prompts
   </div>
   <div class="header-right">
     <a class="admin-btn" href="login.html">⚙ Admin</a>
@@ -735,10 +1294,10 @@ const PROMPTS_DATA = {
 <div class="hero">
   <div class="hero-eyebrow">✦ Biblioteca de Prompts para Influencer IA</div>
   <h1>
-    <span class="line1">Crie conteúdo</span>
-    <span class="line2">que não parece IA</span>
+    <span class="line1">Crie conteúdo visual</span>
+    <span class="line2">com aparência real</span>
   </h1>
-  <p>Prompts prontos para gerar influencers digitais ultrarrealistas, animações e hooks de alta conversão.</p>
+  <p>Biblioteca moderna de prompts para criação visual com IA, animações realistas e fluxos prontos para produção de conteúdo.</p>
 </div>
 
 <div class="stats" id="stats-row">
@@ -784,7 +1343,7 @@ const PROMPTS_DATA = {
   </div>
 </div>
 
-<footer>MVZ Prompts &nbsp;·&nbsp; Biblioteca IA &nbsp;·&nbsp; Todos os direitos reservados</footer>
+<footer>Visual Prompts &nbsp;·&nbsp; Biblioteca IA &nbsp;·&nbsp; Interface moderna</footer>
 
 <script>
 let allPrompts = [], allCats = [], currentCat = 'all', currentQ = '';
@@ -795,13 +1354,13 @@ function loadData(){
   // Assim novos prompts criados no admin aparecem imediatamente
   let d = PROMPTS_DATA;
   try {
-    const live = sessionStorage.getItem('mvz-live-data');
+    const live = sessionStorage.getItem('visual-live-data');
     if (live) {
       const parsed = JSON.parse(live);
       if (parsed && parsed.prompts) d = parsed;
     } else {
       // fallback: localStorage (edições salvas)
-      const saved = localStorage.getItem('mvz-prompts');
+      const saved = localStorage.getItem('visual-prompts');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed && parsed.prompts && parsed.prompts.length >= d.prompts.length) d = parsed;
